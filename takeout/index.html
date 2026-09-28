@@ -1,20 +1,24 @@
-<title>Bun Street Takeout</title>
+<title>Mechel's Takeout</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     color-scheme: light;
-    --red:#DA291C;
-    --red-dark:#B01E13;
-    --mustard:#FFBC0D;
-    --mustard-soft:#FFF1C7;
-    --ink:#27251F;
-    --ink-2:#5B574E;
-    --line:#E9E4DA;
-    --paper:#F7F4EE;
+    --maroon:#7B1E2E;
+    --maroon-dark:#5C1522;
+    --maroon-bright:#C24A5E;
+    --maroon-soft:#F6E8EA;
+    --rose:#F0B9C2;
+    --black:#141112;
+    --black-2:#2A2425;
+    --black-3:#3A3334;
+    --ink:#1C1718;
+    --ink-2:#5E5557;
+    --line:#E9E1E2;
+    --paper:#F7F3F3;
     --white:#FFFFFF;
-    --pickle:#2E8540;
+    --pickle:#2E7D3E;
     --pickle-soft:#E3F2E6;
     --display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
     --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -28,37 +32,38 @@
   p{margin:0}
   button{font:inherit;cursor:pointer}
   a{color:inherit}
-  :focus-visible{outline:3px solid var(--mustard);outline-offset:2px;border-radius:6px}
+  :focus-visible{outline:3px solid var(--maroon-bright);outline-offset:2px;border-radius:6px}
   @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
   .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:24px}
   @media (max-width:640px){.wrap{padding-inline:16px}}
-  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--maroon)}
 
   /* preview strip */
-  .preview{background:var(--ink);color:#F3EFE6;font-size:13px}
+  .preview{background:var(--maroon-dark);color:#F6ECEE;font-size:13px}
   .preview .wrap{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-block:8px}
-  .preview b{color:var(--mustard)}
+  .preview b{color:var(--white)}
 
   /* header */
   header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--white);border-bottom:1px solid var(--line)}
   header.site .wrap{display:flex;align-items:center;gap:28px;height:72px}
   .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-  .logo-mark{width:42px;height:42px;border-radius:12px;background:var(--red);display:grid;place-items:center}
+  .logo-mark{width:42px;height:42px;border-radius:12px;background:var(--maroon);display:grid;place-items:center}
   .logo-word{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-0.03em;line-height:1}
   .logo-word small{display:block;font-family:var(--body);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-top:3px}
   nav.main{display:flex;gap:24px;font-weight:700;font-size:15px}
   nav.main a{text-decoration:none;padding-block:24px;border-bottom:3px solid transparent}
-  nav.main a:hover{border-bottom-color:var(--mustard)}
+  nav.main a:hover{border-bottom-color:var(--maroon)}
   .head-right{margin-left:auto;display:flex;gap:10px;align-items:center}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:12px 22px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .12s ease, background .12s ease;white-space:nowrap}
   .btn:hover{transform:translateY(-1px)}
-  .btn-red{background:var(--red);color:var(--white)}
-  .btn-red:hover{background:var(--red-dark)}
-  .btn-yellow{background:var(--mustard);color:var(--ink)}
+  .btn-maroon{background:var(--maroon);color:var(--white)}
+  .btn-maroon:hover{background:var(--maroon-dark)}
+  .btn-light{background:var(--white);color:var(--black)}
   .btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+  .btn-ghost.on-dark{color:var(--white);box-shadow:inset 0 0 0 2px var(--white)}
   .btn-sm{padding:9px 16px;font-size:14px}
   .cart-btn{position:relative;background:var(--paper);color:var(--ink)}
-  .cart-count{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:10px;background:var(--red);color:#fff;font-size:12px;display:grid;place-items:center;padding-inline:5px;font-variant-numeric:tabular-nums}
+  .cart-count{position:absolute;top:-4px;right:-4px;min-width:20px;height:20px;border-radius:10px;background:var(--maroon);color:#fff;font-size:12px;display:grid;place-items:center;padding-inline:5px;font-variant-numeric:tabular-nums}
   .menu-toggle{display:none;background:none;border:0;padding:8px}
   @media (max-width:920px){
     nav.main{display:none;position:absolute;left:0;right:0;top:72px;background:var(--white);flex-direction:column;gap:0;padding:8px 16px 16px;border-bottom:1px solid var(--line)}
@@ -74,42 +79,44 @@
   }
 
   /* hero */
-  .hero{background:var(--mustard);overflow:hidden;position:relative}
+  .hero{background:var(--black);color:var(--white);overflow:hidden}
   .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center;padding-block:56px}
-  .hero h1{font-size:clamp(44px,7vw,88px);font-weight:800;color:var(--ink)}
-  .hero h1 span{color:var(--red)}
-  .hero p.lede{font-size:19px;max-width:480px;margin-top:18px;color:#3B372E}
+  .hero .eyebrow{color:var(--rose)}
+  .hero h1{font-size:clamp(44px,7vw,88px);font-weight:800}
+  .hero h1 span{background:linear-gradient(transparent 62%, var(--maroon) 62%, var(--maroon) 92%, transparent 92%);padding-inline:4px;margin-inline:-4px}
+  .hero p.lede{font-size:19px;max-width:480px;margin-top:18px;color:#D8CFD0}
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-  .hero-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px;font-weight:600;font-size:14px}
+  .hero-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px;font-weight:600;font-size:14px;color:#E9E1E2}
   .hero-meta span{display:flex;gap:6px;align-items:center}
   .hero-art{position:relative;display:grid;place-items:center}
-  .hero-art .disc{width:min(440px,100%);aspect-ratio:1;border-radius:50%;background:var(--red);display:grid;place-items:center;position:relative}
-  .hero-art svg.burger{width:78%;height:auto;filter:drop-shadow(0 18px 18px rgba(0,0,0,.18));animation:bob 5s ease-in-out infinite}
+  .hero-art .disc{width:min(440px,100%);aspect-ratio:1;border-radius:50%;background:var(--maroon);display:grid;place-items:center;position:relative}
+  .hero-art svg.hero-food{width:80%;height:auto;filter:drop-shadow(0 18px 18px rgba(0,0,0,.3));animation:bob 5s ease-in-out infinite}
   @keyframes bob{50%{transform:translateY(-8px) rotate(-1.5deg)}}
-  .price-tag{position:absolute;right:4%;top:8%;background:var(--white);border-radius:18px;padding:10px 16px;font-weight:700;box-shadow:0 10px 24px rgba(0,0,0,.12);transform:rotate(6deg)}
-  .price-tag b{font-family:var(--display);font-size:30px;display:block;line-height:1;color:var(--red)}
+  .price-tag{position:absolute;right:2%;top:8%;background:var(--white);color:var(--ink);border-radius:18px;padding:10px 16px;font-weight:700;box-shadow:0 10px 24px rgba(0,0,0,.25);transform:rotate(6deg)}
+  .price-tag b{font-family:var(--display);font-size:30px;display:block;line-height:1;color:var(--maroon)}
   .price-tag small{font-size:12px;color:var(--ink-2)}
   @media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.hero-art{order:-1}.hero-art .disc{width:min(320px,100%)}}
 
-  /* quick order bar */
+  /* quick bar */
   .quick{background:var(--white);border-bottom:1px solid var(--line)}
-  .quick .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-  .quick-item{display:flex;gap:14px;align-items:center;padding:20px 18px;border-right:1px solid var(--line)}
+  .quick .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+  .quick-item{display:flex;gap:14px;align-items:center;padding:20px 16px;border-right:1px solid var(--line)}
   .quick-item:last-child{border-right:0}
-  .quick-item .ic{width:44px;height:44px;border-radius:12px;background:var(--mustard-soft);display:grid;place-items:center;flex-shrink:0}
-  .quick-item b{display:block;font-size:15.5px}
-  .quick-item span{font-size:14px;color:var(--ink-2)}
-  @media (max-width:760px){.quick .wrap{grid-template-columns:1fr}.quick-item{border-right:0;border-bottom:1px solid var(--line)}.quick-item:last-child{border-bottom:0}}
+  .quick-item .ic{width:44px;height:44px;border-radius:12px;background:var(--maroon-soft);color:var(--maroon);display:grid;place-items:center;flex-shrink:0}
+  .quick-item b{display:block;font-size:15px}
+  .quick-item span{font-size:13.5px;color:var(--ink-2)}
+  @media (max-width:1000px){.quick .wrap{grid-template-columns:1fr 1fr}.quick-item:nth-child(2){border-right:0}.quick-item:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+  @media (max-width:600px){.quick .wrap{grid-template-columns:1fr}.quick-item{border-right:0;border-bottom:1px solid var(--line)}.quick-item:last-child{border-bottom:0}}
 
   section{padding-block:72px}
   .sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
   .sec-head h2{font-size:clamp(32px,4.4vw,48px);font-weight:800;margin-top:6px}
-  .sec-head p{color:var(--ink-2);max-width:520px;margin-top:10px}
+  .sec-head p{color:var(--ink-2);max-width:540px;margin-top:10px}
 
   /* menu */
   .tabs{display:flex;gap:8px;flex-wrap:wrap}
   .tab{border:0;background:var(--paper);border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;color:var(--ink)}
-  .tab[aria-pressed="true"]{background:var(--ink);color:var(--white)}
+  .tab[aria-pressed="true"]{background:var(--black);color:var(--white)}
   .menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
   @media (max-width:1000px){.menu-grid{grid-template-columns:repeat(3,1fr)}}
   @media (max-width:720px){.menu-grid{grid-template-columns:repeat(2,1fr)}}
@@ -121,42 +128,45 @@
   .card .desc{font-size:14px;color:var(--ink-2);flex:1}
   .card .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
   .card .price{font-weight:700;font-size:17px;font-variant-numeric:tabular-nums}
-  .card .cal{font-size:12.5px;color:var(--ink-2);font-weight:600}
-  .add{width:40px;height:40px;border-radius:50%;border:0;background:var(--red);color:#fff;display:grid;place-items:center;transition:transform .12s ease}
+  .card .unit{font-size:12.5px;color:var(--ink-2);font-weight:600}
+  .add{width:40px;height:40px;border-radius:50%;border:0;background:var(--maroon);color:#fff;display:grid;place-items:center;transition:transform .12s ease}
   .add:hover{transform:scale(1.08)}
   .add.done{background:var(--pickle)}
-  .badge{align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--mustard);padding:4px 9px;border-radius:6px}
+  .badge{align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--black);color:var(--white);padding:4px 9px;border-radius:6px}
+  .kosher-note{margin-top:22px;display:flex;gap:10px;align-items:center;font-size:14px;color:var(--ink-2)}
+  .kosher-note b{color:var(--ink)}
 
   /* voice */
-  .voice{background:var(--ink);color:#F3EFE6}
-  .voice .sec-head p{color:#C9C3B6}
-  .voice .eyebrow{color:var(--mustard)}
+  .voice{background:var(--black);color:#F3ECEC}
+  .voice .sec-head p{color:#C7BDBE}
+  .voice .eyebrow{color:var(--rose)}
   .voice-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
   @media (max-width:880px){.voice-grid{grid-template-columns:1fr}}
-  .phone-card{background:#34312A;border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:16px;min-height:430px}
+  .phone-card{background:var(--black-2);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:16px;min-height:430px}
   .call-top{display:flex;align-items:center;gap:12px}
-  .call-avatar{width:46px;height:46px;border-radius:50%;background:var(--mustard);display:grid;place-items:center;flex-shrink:0}
+  .call-avatar{width:46px;height:46px;border-radius:50%;background:var(--maroon);color:var(--white);display:grid;place-items:center;flex-shrink:0}
   .call-top b{display:block}
-  .call-top span{font-size:13px;color:#BDB6A7}
-  .call-state{margin-left:auto;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px;background:#4A463C;color:#E8E2D4;font-variant-numeric:tabular-nums}
-  .call-state.live{background:var(--red);color:#fff}
+  .call-top span{font-size:13px;color:#B9AEAF}
+  .call-state{margin-left:auto;font-size:12.5px;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--black-3);color:#E9E1E2;font-variant-numeric:tabular-nums}
+  .call-state.live{background:var(--maroon-bright);color:#fff}
   .wave{display:flex;gap:4px;align-items:center;height:40px}
-  .wave i{display:block;width:5px;border-radius:3px;background:var(--mustard);height:6px;opacity:.5;transition:height .15s ease}
+  .wave i{display:block;width:5px;border-radius:3px;background:var(--maroon-bright);height:6px;opacity:.5}
   .wave.on i{opacity:1;animation:wv 1s ease-in-out infinite}
   @keyframes wv{0%,100%{height:6px}50%{height:34px}}
   .transcript{display:flex;flex-direction:column;gap:10px;flex:1;overflow-y:auto;max-height:280px;padding-right:4px}
   .msg{max-width:85%;padding:10px 14px;border-radius:16px;font-size:14.5px;line-height:1.4;animation:pop .25s ease}
   @keyframes pop{from{opacity:.2;transform:translateY(6px)}}
-  .msg.ai{background:#4A463C;align-self:flex-start;border-bottom-left-radius:4px}
-  .msg.cx{background:var(--mustard);color:var(--ink);align-self:flex-end;border-bottom-right-radius:4px}
-  .msg small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.65;margin-bottom:2px}
+  .msg.ai{background:var(--black-3);align-self:flex-start;border-bottom-left-radius:4px}
+  .msg.cx{background:var(--maroon);color:var(--white);align-self:flex-end;border-bottom-right-radius:4px}
+  .msg small{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.7;margin-bottom:2px}
   .voice-ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-  .voice-ctas .num{font-weight:700;font-variant-numeric:tabular-nums;color:#F3EFE6;user-select:all}
-  .ticket{background:#FFFDF8;color:var(--ink);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px}
+  .voice-ctas .num{font-weight:700;font-variant-numeric:tabular-nums;user-select:all}
+  .ticket{background:var(--white);color:var(--ink);border-radius:24px;padding:22px;display:flex;flex-direction:column;gap:14px}
   .ticket h3{font-size:22px}
-  .ticket-lines{display:flex;flex-direction:column;gap:0;border-top:2px dashed var(--line)}
+  .ticket-lines{display:flex;flex-direction:column;border-top:2px dashed var(--line)}
   .t-line{display:flex;justify-content:space-between;gap:10px;padding-block:10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;animation:pop .25s ease}
   .t-empty{color:var(--ink-2);font-size:14px;padding-block:14px}
+  .t-pickup{font-size:14px;font-weight:700;color:var(--maroon)}
   .t-total{display:flex;justify-content:space-between;font-weight:800;font-family:var(--display);font-size:22px;font-variant-numeric:tabular-nums}
   .sync-list{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
   .sync-list li{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--ink-2)}
@@ -166,41 +176,42 @@
   .features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}
   @media (max-width:880px){.features{grid-template-columns:1fr 1fr}}
   @media (max-width:460px){.features{grid-template-columns:1fr}}
-  .feat b{display:block;color:var(--mustard);margin-bottom:4px}
-  .feat p{font-size:14px;color:#C9C3B6}
+  .feat b{display:block;color:var(--white);margin-bottom:4px}
+  .feat p{font-size:14px;color:#C7BDBE}
+  .feat{border-top:3px solid var(--maroon);padding-top:12px}
 
   /* rewards */
   .rewards{background:var(--paper)}
   .rw-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch}
   @media (max-width:880px){.rw-grid{grid-template-columns:1fr}}
-  .member{background:var(--red);color:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden}
+  .member{background:var(--maroon);color:#fff;border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:18px}
+  .member .eyebrow{color:var(--rose)}
   .member h3{font-size:clamp(26px,3vw,34px)}
   .points{font-family:var(--display);font-weight:800;font-size:56px;line-height:1;font-variant-numeric:tabular-nums}
   .points small{font-family:var(--body);font-size:15px;font-weight:600;opacity:.85;margin-left:6px}
-  .bar{height:12px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden}
-  .bar i{display:block;height:100%;width:83%;background:var(--mustard);border-radius:6px}
+  .bar{height:12px;background:rgba(255,255,255,.22);border-radius:6px;overflow:hidden}
+  .bar i{display:block;height:100%;width:83%;background:var(--white);border-radius:6px}
   .bar-labels{display:flex;justify-content:space-between;font-size:13px;opacity:.9;margin-top:6px}
-  .usual{background:rgba(0,0,0,.16);border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .usual{background:rgba(0,0,0,.25);border-radius:16px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
   .usual b{display:block}
   .usual span{font-size:14px;opacity:.85}
   .offers{display:grid;gap:14px}
-  .offer{background:var(--white);border-radius:20px;padding:18px;display:flex;gap:14px;align-items:center}
-  .offer .pic{width:72px;height:72px;border-radius:14px;background:var(--mustard-soft);display:grid;place-items:center;flex-shrink:0}
-  .offer .pic svg{width:48px;height:auto}
+  .offer{background:var(--white);border-radius:20px;padding:18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .offer .pic{width:72px;height:72px;border-radius:14px;background:var(--maroon-soft);display:grid;place-items:center;flex-shrink:0}
+  .offer .pic svg{width:50px;height:auto}
+  .offer .txt{flex:1;min-width:160px}
   .offer b{display:block;font-size:16.5px}
   .offer span{font-size:13.5px;color:var(--ink-2)}
   .offer .why{display:inline-block;margin-top:6px;font-size:11.5px;font-weight:700;letter-spacing:.04em;background:var(--pickle-soft);color:var(--pickle);padding:3px 8px;border-radius:6px}
-  .offer .btn{margin-left:auto}
 
   /* owner */
-  .owner-note{display:flex;gap:10px;align-items:center;background:var(--mustard-soft);border-radius:12px;padding:10px 14px;font-size:14px;font-weight:600;margin-bottom:22px}
   .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:center;margin-bottom:28px}
-  .flow-box{border:2px solid var(--ink);border-radius:18px;padding:16px}
+  .flow-box{border:2px solid var(--black);border-radius:18px;padding:16px}
   .flow-box h4{font-size:17px;margin-bottom:8px}
   .flow-box ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--ink-2)}
-  .flow-box.crm{background:var(--ink);color:#fff;border-color:var(--ink)}
-  .flow-box.crm ul{color:#C9C3B6}
-  .flow-arrow{font-family:var(--display);font-weight:800;font-size:28px;color:var(--red)}
+  .flow-box.crm{background:var(--black);color:#fff}
+  .flow-box.crm ul{color:#C7BDBE}
+  .flow-arrow{font-family:var(--display);font-weight:800;font-size:28px;color:var(--maroon)}
   @media (max-width:880px){.flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg);justify-self:center}}
   .dash{border:1px solid var(--line);border-radius:22px;overflow:hidden}
   .dash-top{background:var(--paper);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-weight:700;font-size:14px}
@@ -224,35 +235,38 @@
   .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
   .table-wrap{padding:18px;overflow-x:auto}
   table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
-  th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:700;padding:8px 8px;border-bottom:1px solid var(--line)}
+  th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);font-weight:700;padding:8px;border-bottom:1px solid var(--line)}
   td{padding:10px 8px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
   tr:last-child td{border-bottom:0}
   .chip{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--paper)}
-  .chip.phone{background:var(--mustard-soft)}
-  .chip.vip{background:var(--ink);color:#fff}
-  .chip.lapsed{background:#FDE3E1;color:var(--red-dark)}
+  .chip.phone{background:var(--maroon-soft);color:var(--maroon-dark)}
+  .chip.vip{background:var(--black);color:#fff}
+  .chip.lapsed{background:#FBE3E0;color:#A12B1D}
   .chip.new{background:var(--pickle-soft);color:var(--pickle)}
 
-  /* locations + footer */
-  .loc{background:var(--mustard)}
+  /* location + footer */
+  .loc{background:var(--maroon);color:var(--white)}
+  .loc .eyebrow{color:var(--rose)}
   .loc .wrap{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
   @media (max-width:820px){.loc .wrap{grid-template-columns:1fr}}
-  .hours{background:var(--white);border-radius:20px;padding:20px}
-  .hours div{display:flex;justify-content:space-between;padding-block:9px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+  .hours{background:var(--white);color:var(--ink);border-radius:20px;padding:20px}
+  .hours div{display:flex;justify-content:space-between;gap:10px;padding-block:9px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
   .hours div:last-child{border-bottom:0}
-  .hours .today{font-weight:700;color:var(--red)}
-  footer{background:var(--ink);color:#C9C3B6;padding-block:48px 28px;font-size:14px}
+  .hours .today{font-weight:700;color:var(--maroon)}
+  .hours .closed span:last-child{color:var(--maroon);font-weight:700}
+  .hours p{font-size:13px;color:var(--ink-2);margin-top:10px}
+  footer{background:var(--black);color:#C7BDBE;padding-block:48px 28px;font-size:14px}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px}
   @media (max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}}
   footer h5{color:#fff;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px}
   footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
   footer a{text-decoration:none}
   footer a:hover{color:#fff}
-  .foot-bottom{border-top:1px solid #45413A;margin-top:32px;padding-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12.5px}
+  .foot-bottom{border-top:1px solid var(--black-3);margin-top:32px;padding-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12.5px}
 
-  /* cart drawer */
-  .scrim{position:fixed;inset:0;background:rgba(20,18,14,.45);z-index:60}
-  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--white);z-index:61;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));box-shadow:-10px 0 30px rgba(0,0,0,.15)}
+  /* bag drawer */
+  .scrim{position:fixed;inset:0;background:rgba(20,17,18,.5);z-index:60}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--white);z-index:61;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));box-shadow:-10px 0 30px rgba(0,0,0,.2)}
   .drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
   .drawer-head h3{font-size:26px}
   .x{background:var(--paper);border:0;width:38px;height:38px;border-radius:50%;font-size:20px}
@@ -263,57 +277,97 @@
   .qty button{width:28px;height:28px;border-radius:50%;border:0;background:var(--paper);font-weight:700}
   .line .pr{width:64px;text-align:right;font-variant-numeric:tabular-nums}
   .drawer label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
-  .drawer input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit}
+  .drawer input,.drawer select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:var(--white);color:var(--ink)}
   .drawer .hint{font-size:12.5px;color:var(--ink-2);margin-top:6px}
-  .sum{display:flex;justify-content:space-between;font-weight:800;font-size:20px;margin:16px 0 12px;font-variant-numeric:tabular-nums}
+  .sum{display:flex;justify-content:space-between;font-weight:800;font-size:20px;margin:16px 0 4px;font-variant-numeric:tabular-nums}
   .ok-box{background:var(--pickle-soft);color:var(--pickle);border-radius:12px;padding:12px 14px;font-weight:600;font-size:14px;margin-top:12px}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="i-burger" viewBox="0 0 200 170">
-      <path d="M20 78C20 30 58 8 100 8s80 22 80 70z" fill="#E9A23B"/>
-      <path d="M20 78C20 30 58 8 100 8s80 22 80 70z" fill="#D48A26" opacity=".35" transform="translate(0 6) scale(1 .92)"/>
-      <g fill="#FFF3D6"><ellipse cx="70" cy="36" rx="5" ry="3" transform="rotate(-20 70 36)"/><ellipse cx="100" cy="26" rx="5" ry="3"/><ellipse cx="130" cy="36" rx="5" ry="3" transform="rotate(20 130 36)"/><ellipse cx="86" cy="54" rx="5" ry="3" transform="rotate(-10 86 54)"/><ellipse cx="116" cy="52" rx="5" ry="3" transform="rotate(10 116 52)"/><ellipse cx="148" cy="58" rx="4" ry="2.6" transform="rotate(25 148 58)"/><ellipse cx="54" cy="58" rx="4" ry="2.6" transform="rotate(-25 54 58)"/></g>
-      <path d="M12 84q11 12 22 0t22 0 22 0 22 0 22 0 22 0 22 0 22 0 22 0v8H12z" fill="#4FAE3E"/>
-      <path d="M16 90h168l-24 22-18-10-18 12-20-10-22 12-18-12-20 10z" fill="#FFBC0D"/>
-      <rect x="14" y="94" width="172" height="26" rx="13" fill="#6B3A1E"/>
-      <rect x="18" y="118" width="164" height="8" rx="4" fill="#DA291C"/>
-      <path d="M18 128h164v10c0 16-14 26-30 26H48c-16 0-30-10-30-26z" fill="#E9A23B"/>
+    <!-- pastrami on rye -->
+    <symbol id="i-sandwich" viewBox="0 0 200 170">
+      <rect x="97" y="0" width="5" height="40" rx="2" fill="#C9A87A"/>
+      <circle cx="99.5" cy="4" r="6" fill="#2E7D3E"/>
+      <path d="M18 60c0-22 18-34 40-34h84c22 0 40 12 40 34v6H18z" fill="#B8834F"/>
+      <path d="M26 58c2-16 16-24 34-24h80c18 0 32 8 34 24" fill="none" stroke="#8E5E30" stroke-width="3"/>
+      <g fill="#6E4521"><ellipse cx="60" cy="46" rx="3" ry="1.6"/><ellipse cx="88" cy="40" rx="3" ry="1.6"/><ellipse cx="118" cy="44" rx="3" ry="1.6"/><ellipse cx="144" cy="50" rx="3" ry="1.6"/><ellipse cx="74" cy="54" rx="3" ry="1.6"/><ellipse cx="130" cy="56" rx="3" ry="1.6"/></g>
+      <path d="M16 66h168v4H16z" fill="#E0B02A"/>
+      <path d="M10 72q15-8 30 0t30 0 30 0 30 0 30 0 30 0v14q-15 8-30 0t-30 0-30 0-30 0-30 0-30 0z" fill="#B5453F"/>
+      <path d="M12 88q15-8 30 0t30 0 30 0 30 0 30 0 28 0v14q-14 8-28 0t-30 0-30 0-30 0-30 0-30 0z" fill="#9C3530"/>
+      <path d="M10 104q15-8 30 0t30 0 30 0 30 0 30 0 30 0v14q-15 8-30 0t-30 0-30 0-30 0-30 0-30 0z" fill="#B5453F"/>
+      <g stroke="#E7A59C" stroke-width="2" opacity=".7"><path d="M30 80h20M110 79h24M60 96h22M140 95h18M40 112h18M120 112h26"/></g>
+      <path d="M18 122h164v10c0 14-18 22-40 22H58c-22 0-40-8-40-22z" fill="#B8834F"/>
+      <path d="M18 122h164v6H18z" fill="#D9A56B"/>
     </symbol>
-    <symbol id="i-fries" viewBox="0 0 200 200">
-      <g fill="#FFBC0D"><rect x="52" y="22" width="16" height="96" rx="4" transform="rotate(-10 60 70)"/><rect x="74" y="12" width="16" height="100" rx="4" transform="rotate(-4 82 62)"/><rect x="96" y="8" width="16" height="104" rx="4"/><rect x="118" y="14" width="16" height="100" rx="4" transform="rotate(5 126 64)"/><rect x="138" y="26" width="16" height="92" rx="4" transform="rotate(11 146 72)"/></g>
-      <path d="M38 80h124l-16 110H54z" fill="#DA291C"/>
-      <path d="M38 80q62 34 124 0" fill="#B01E13"/>
-      <circle cx="100" cy="138" r="18" fill="#FFBC0D"/>
+    <!-- cholent pot -->
+    <symbol id="i-cholent" viewBox="0 0 200 180">
+      <ellipse cx="100" cy="62" rx="84" ry="18" fill="#5A3A22"/>
+      <g fill="#8A5A34"><circle cx="66" cy="60" r="7"/><circle cx="84" cy="66" r="6"/><circle cx="120" cy="58" r="7"/><circle cx="138" cy="66" r="6"/><circle cx="104" cy="68" r="5"/></g>
+      <ellipse cx="96" cy="56" rx="14" ry="9" fill="#C98E5A"/>
+      <ellipse cx="96" cy="56" rx="5" ry="4" fill="#E9C38A"/>
+      <path d="M50 58c6-8 18-10 26-4" stroke="#C9884E" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <path d="M16 62h168v56c0 30-38 48-84 48s-84-18-84-48z" fill="#7B1E2E"/>
+      <path d="M16 62h168v10H16z" fill="#5C1522"/>
+      <rect x="2" y="74" width="20" height="10" rx="5" fill="#141112"/>
+      <rect x="178" y="74" width="20" height="10" rx="5" fill="#141112"/>
+      <path d="M30 110c20 14 120 14 140 0" stroke="#FFFFFF" stroke-opacity=".25" stroke-width="4" fill="none"/>
     </symbol>
-    <symbol id="i-drink" viewBox="0 0 200 200">
-      <rect x="112" y="6" width="10" height="60" rx="4" fill="#DA291C" transform="rotate(12 117 36)"/>
-      <rect x="52" y="44" width="96" height="22" rx="8" fill="#FFFFFF" stroke="#27251F" stroke-width="4"/>
-      <path d="M58 66h84l-12 124H70z" fill="#FFBC0D"/>
-      <path d="M64 110h72l-4 40H68z" fill="#DA291C"/>
+    <!-- matzo ball soup -->
+    <symbol id="i-soup" viewBox="0 0 200 170">
+      <ellipse cx="100" cy="64" rx="86" ry="20" fill="#E8B84A"/>
+      <circle cx="78" cy="58" r="20" fill="#F2DDB0"/>
+      <circle cx="122" cy="62" r="18" fill="#EDD39E"/>
+      <g fill="#E07A2E"><circle cx="46" cy="66" r="5"/><circle cx="150" cy="58" r="5"/><circle cx="104" cy="74" r="4"/></g>
+      <g stroke="#2E7D3E" stroke-width="3" stroke-linecap="round"><path d="M140 70l8 4M60 72l-6 5M96 46l2-6"/></g>
+      <path d="M14 66h172c0 44-38 76-86 76S14 110 14 66z" fill="#FFFFFF" stroke="#141112" stroke-width="4"/>
+      <path d="M30 96c20 16 120 16 140 0" stroke="#7B1E2E" stroke-width="6" fill="none"/>
+      <rect x="66" y="140" width="68" height="10" rx="5" fill="#141112"/>
     </symbol>
-    <symbol id="i-nuggets" viewBox="0 0 200 200">
-      <path d="M30 110c0-30 30-46 54-40 20 5 26 26 18 44-10 22-34 30-52 24-14-5-20-14-20-28z" fill="#E9A23B"/>
-      <path d="M96 84c8-26 44-34 62-18 16 14 14 40-6 52-18 11-44 8-54-8-4-8-4-17-2-26z" fill="#D48A26"/>
-      <path d="M78 140c10-18 40-20 54-6 12 12 8 34-10 42-18 8-40 2-46-12-3-8-2-16 2-24z" fill="#F0B04E"/>
-      <g fill="#B97420" opacity=".55"><circle cx="58" cy="104" r="4"/><circle cx="130" cy="82" r="4"/><circle cx="110" cy="156" r="4"/><circle cx="72" cy="124" r="3"/></g>
+    <!-- potato knish -->
+    <symbol id="i-knish" viewBox="0 0 200 170">
+      <rect x="28" y="34" width="144" height="110" rx="34" fill="#D9A04E"/>
+      <rect x="28" y="34" width="144" height="110" rx="34" fill="none" stroke="#B57A2E" stroke-width="4"/>
+      <path d="M100 89m-34 0a34 30 0 1 0 68 0a34 30 0 1 0-68 0" fill="#E9BE72"/>
+      <path d="M100 89c0-16 18-18 22-6s-8 22-22 20-22-14-18-26" fill="none" stroke="#A86E26" stroke-width="5" stroke-linecap="round"/>
+      <g fill="#FFF3D6" opacity=".7"><circle cx="54" cy="56" r="3"/><circle cx="148" cy="60" r="3"/><circle cx="56" cy="124" r="3"/><circle cx="146" cy="120" r="3"/></g>
     </symbol>
-    <symbol id="i-shake" viewBox="0 0 200 200">
-      <rect x="104" y="4" width="10" height="52" rx="4" fill="#DA291C" transform="rotate(14 109 30)"/>
-      <path d="M58 58c0-22 20-32 42-32s42 10 42 32z" fill="#FFF3D6"/>
-      <circle cx="100" cy="26" r="10" fill="#DA291C"/>
-      <rect x="50" y="56" width="100" height="14" rx="7" fill="#27251F"/>
-      <path d="M58 70h84l-12 120H70z" fill="#F6C6CF"/>
-      <path d="M62 100h76l-2 22H64z" fill="#FFFFFF" opacity=".7"/>
+    <!-- potato kugel slice -->
+    <symbol id="i-kugel" viewBox="0 0 200 170">
+      <path d="M30 60l40-30h110l-40 30z" fill="#B96F24"/>
+      <path d="M30 60h110v80H30z" fill="#E9C27A"/>
+      <path d="M140 60l40-30v80l-40 30z" fill="#D6A55A"/>
+      <path d="M30 60h110v12H30z" fill="#A45F1C"/>
+      <g fill="#F6DEAA"><rect x="42" y="84" width="22" height="5" rx="2"/><rect x="76" y="96" width="26" height="5" rx="2"/><rect x="108" y="82" width="20" height="5" rx="2"/><rect x="50" y="116" width="24" height="5" rx="2"/><rect x="96" y="120" width="22" height="5" rx="2"/></g>
     </symbol>
-    <symbol id="i-egg" viewBox="0 0 200 170">
-      <path d="M24 70c0-34 34-52 76-52s76 18 76 52z" fill="#EFC27A"/>
-      <path d="M22 76h156v10H22z" fill="#F7E3B8"/>
-      <ellipse cx="100" cy="98" rx="84" ry="14" fill="#FFFFFF"/>
-      <circle cx="100" cy="96" r="14" fill="#FFBC0D"/>
-      <rect x="18" y="108" width="164" height="16" rx="8" fill="#C2554A"/>
-      <path d="M24 128h152v6c0 16-14 24-30 24H54c-16 0-30-8-30-24z" fill="#EFC27A"/>
+    <!-- pickles -->
+    <symbol id="i-pickle" viewBox="0 0 200 170">
+      <rect x="40" y="40" width="42" height="116" rx="21" fill="#4C8B3A" transform="rotate(-18 61 98)"/>
+      <rect x="92" y="28" width="44" height="124" rx="22" fill="#3F7A30" transform="rotate(10 114 90)"/>
+      <g fill="#8DBA5C"><circle cx="58" cy="72" r="3"/><circle cx="70" cy="100" r="3"/><circle cx="62" cy="128" r="3"/><circle cx="108" cy="58" r="3"/><circle cx="122" cy="84" r="3"/><circle cx="112" cy="112" r="3"/><circle cx="120" cy="136" r="3"/></g>
+      <ellipse cx="160" cy="130" rx="30" ry="22" fill="#F4EFE6" stroke="#141112" stroke-width="3"/>
+      <g stroke="#7B1E2E" stroke-width="3" stroke-linecap="round"><path d="M146 124l10 4M160 118l8 6M152 136l12-2"/></g>
+    </symbol>
+    <!-- soda can -->
+    <symbol id="i-soda" viewBox="0 0 200 200">
+      <path d="M62 30h76l6 12v130l-6 12H62l-6-12V42z" fill="#7B1E2E"/>
+      <rect x="62" y="22" width="76" height="12" rx="4" fill="#B9AEAF"/>
+      <rect x="56" y="80" width="88" height="50" fill="#141112"/>
+      <path d="M72 106c8-14 20-14 28 0s20 14 28 0" stroke="#F0B9C2" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <circle cx="100" cy="150" r="7" fill="#F0B9C2"/>
+    </symbol>
+    <!-- black and white cookie -->
+    <symbol id="i-cookie" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="80" fill="#E4C08A"/>
+      <path d="M100 26a74 74 0 0 1 0 148z" fill="#1E1718"/>
+      <path d="M100 26a74 74 0 0 0 0 148z" fill="#FBF6EE"/>
+      <circle cx="100" cy="100" r="74" fill="none" stroke="#D2A868" stroke-width="3"/>
+    </symbol>
+    <!-- rugelach -->
+    <symbol id="i-rugelach" viewBox="0 0 200 170">
+      <path d="M22 110c10-50 60-80 110-60 30 12 44 40 46 60-30-18-60-20-90-6-24 10-46 12-66 6z" fill="#D9A04E"/>
+      <path d="M50 96c18-30 54-42 86-26M70 104c16-18 44-24 70-14" stroke="#5A2A1A" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <g fill="#FFF7EA"><circle cx="80" cy="66" r="2.5"/><circle cx="110" cy="60" r="2.5"/><circle cx="140" cy="74" r="2.5"/><circle cx="60" cy="90" r="2.5"/></g>
     </symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
@@ -322,27 +376,29 @@
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="9.5" r="2.5" fill="currentColor"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z" fill="currentColor"/></symbol>
+    <symbol id="i-seal" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 12.2l2.8 2.8L16.2 9.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-candles" viewBox="0 0 24 24"><path d="M8 10v10M16 10v10M5 20h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M8 3.5c1.4 1.6 1.4 3.2 0 4.2-1.4-1-1.4-2.6 0-4.2zM16 3.5c1.4 1.6 1.4 3.2 0 4.2-1.4-1-1.4-2.6 0-4.2z" fill="currentColor"/></symbol>
   </defs>
 </svg>
 
 <div class="preview">
   <div class="wrap">
-    <span><b>Design preview</b> · "Bun Street" is a placeholder name. Menu, prices, customers and numbers are sample data.</span>
-    <span>Try it: add food to the bag, or play the voice-order demo.</span>
+    <span><b>Design preview</b> · Prices, address, customers and numbers are sample data. Kashrus agency is a placeholder.</span>
+    <span>Try it: add food to the bag, or play the phone-order demo.</span>
   </div>
 </div>
 
 <header class="site">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="Bun Street home">
-      <span class="logo-mark"><svg width="30" height="26" aria-hidden="true"><use href="#i-burger"/></svg></span>
-      <span class="logo-word">Bun Street<small>Burgers · Takeout</small></span>
+    <a class="logo" href="#top" aria-label="Mechel's Takeout home">
+      <span class="logo-mark"><svg width="30" height="26" aria-hidden="true"><use href="#i-sandwich"/></svg></span>
+      <span class="logo-word">Mechel's<small>Kosher Deli · Takeout</small></span>
     </a>
     <nav class="main" id="nav">
       <a href="#menu">Menu</a>
-      <a href="#voice">Order by Voice</a>
+      <a href="#voice">Order by Phone</a>
       <a href="#rewards">Rewards</a>
-      <a href="#location">Location</a>
+      <a href="#location">Hours</a>
       <a href="#owner">Owner View</a>
     </nav>
     <div class="head-right">
@@ -352,7 +408,7 @@
         <span class="hide-sm">Bag</span>
         <span class="cart-count" id="cartCount">0</span>
       </button>
-      <a class="btn btn-red btn-sm" href="#menu">Order Now</a>
+      <a class="btn btn-maroon btn-sm" href="#menu">Order Now</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
         <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
       </button>
@@ -364,26 +420,26 @@
   <section class="hero" style="padding-block:0">
     <div class="wrap">
       <div>
-        <span class="eyebrow">New this week</span>
-        <h1>The Double Stack is <span>back.</span></h1>
-        <p class="lede">Two smashed patties, melted American, pickles and Street Sauce on a toasted potato bun. Order ahead and skip the line, or call in and our AI order-taker will handle it.</p>
+        <span class="eyebrow">Glatt kosher deli · Takeout</span>
+        <h1>Pastrami, <span>piled high.</span></h1>
+        <p class="lede">Hand-sliced pastrami and corned beef on fresh rye, cholent for Shabbos, and matzo ball soup like your bubby made. Order ahead, or just call and our AI order line will take it.</p>
         <div class="hero-ctas">
-          <a class="btn btn-red" href="#menu">
+          <a class="btn btn-maroon" href="#menu">
             <svg width="18" height="18" aria-hidden="true"><use href="#i-bag"/></svg>Order Pickup
           </a>
-          <a class="btn btn-ghost" href="#voice">
-            <svg width="18" height="18" aria-hidden="true"><use href="#i-mic"/></svg>Order by Voice
+          <a class="btn btn-ghost on-dark" href="#voice">
+            <svg width="18" height="18" aria-hidden="true"><use href="#i-mic"/></svg>Order by Phone
           </a>
         </div>
         <div class="hero-meta">
-          <span><svg width="18" height="18" aria-hidden="true"><use href="#i-clock"/></svg>Ready in about 12 min</span>
-          <span><svg width="18" height="18" aria-hidden="true"><use href="#i-star"/></svg>Earn 10 pts per $1</span>
+          <span><svg width="18" height="18" aria-hidden="true"><use href="#i-seal"/></svg>Under [Kashrus Agency] supervision</span>
+          <span><svg width="18" height="18" aria-hidden="true"><use href="#i-clock"/></svg>Ready in about 15 min</span>
         </div>
       </div>
       <div class="hero-art">
         <div class="disc">
-          <svg class="burger" viewBox="0 0 200 170" role="img" aria-label="Illustration of the Double Stack burger"><use href="#i-burger"/></svg>
-          <div class="price-tag"><b>$7.49</b><small>Double Stack</small></div>
+          <svg class="hero-food" viewBox="0 0 200 170" role="img" aria-label="Illustration of a pastrami on rye sandwich"><use href="#i-sandwich"/></svg>
+          <div class="price-tag"><b>$16.95</b><small>Pastrami on Rye</small></div>
         </div>
       </div>
     </div>
@@ -393,15 +449,19 @@
     <div class="wrap">
       <div class="quick-item">
         <span class="ic"><svg width="22" height="22" aria-hidden="true"><use href="#i-pin"/></svg></span>
-        <div><b>Pickup at 214 Palafox St</b><span>Open now until 11 PM · <a href="#location">Change</a></span></div>
+        <div><b>Pickup at 214 Main St</b><span>Open now until 9 PM · <a href="#location">Hours</a></span></div>
       </div>
       <div class="quick-item">
         <span class="ic"><svg width="22" height="22" aria-hidden="true"><use href="#i-mic"/></svg></span>
-        <div><b>Call to order, 24/7</b><span>(850) 555-0142 · answered by AI</span></div>
+        <div><b>Call to order</b><span>(555) 010-4455 · answered by AI</span></div>
+      </div>
+      <div class="quick-item">
+        <span class="ic"><svg width="22" height="22" aria-hidden="true"><use href="#i-candles"/></svg></span>
+        <div><b>Shabbos pre-orders open</b><span>Order by Thursday 9 PM</span></div>
       </div>
       <div class="quick-item">
         <span class="ic"><svg width="22" height="22" aria-hidden="true"><use href="#i-star"/></svg></span>
-        <div><b>Welcome back, Jordan</b><span>1,240 pts · free fries unlocked</span></div>
+        <div><b>Welcome back, Dovid</b><span>1,240 pts · free kugel unlocked</span></div>
       </div>
     </div>
   </div>
@@ -411,11 +471,12 @@
       <div class="sec-head">
         <div>
           <span class="eyebrow">Our menu</span>
-          <h2>What are you craving?</h2>
+          <h2>What are you hungry for?</h2>
         </div>
         <div class="tabs" role="group" aria-label="Menu categories" id="tabs"></div>
       </div>
       <div class="menu-grid" id="menuGrid"></div>
+      <p class="kosher-note"><svg width="20" height="20" style="color:var(--maroon);flex-shrink:0" aria-hidden="true"><use href="#i-seal"/></svg><span><b>Glatt kosher, meat (fleishig).</b> Everything we serve is meat or pareve. No dairy on the premises. Desserts are pareve.</span></p>
     </div>
   </section>
 
@@ -423,28 +484,28 @@
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <span class="eyebrow">AI voice ordering</span>
+          <span class="eyebrow">AI phone ordering</span>
           <h2>Just call. It takes the order.</h2>
-          <p>Your phone line gets an AI order-taker that knows the menu, upsells, recognizes returning callers from your CRM and sends the ticket straight to the kitchen. Press play to hear how a call goes.</p>
+          <p>Your phone line gets an AI order-taker that knows the menu, recognizes regulars from your CRM, takes Shabbos pre-orders and sends the ticket straight to the kitchen. Press play to see how a call goes.</p>
         </div>
       </div>
 
       <div class="voice-grid">
         <div class="phone-card">
           <div class="call-top">
-            <span class="call-avatar"><svg width="22" height="22" style="color:var(--ink)" aria-hidden="true"><use href="#i-mic"/></svg></span>
-            <div><b>Bun Street order line</b><span>Incoming from (850) 555-0199</span></div>
+            <span class="call-avatar"><svg width="22" height="22" aria-hidden="true"><use href="#i-mic"/></svg></span>
+            <div><b>Mechel's order line</b><span>Incoming from (555) 010-7788</span></div>
             <span class="call-state" id="callState">Ready</span>
           </div>
           <div class="wave" id="wave" aria-hidden="true"></div>
           <div class="transcript" id="transcript" aria-live="polite">
-            <p class="t-empty" style="color:#BDB6A7">The transcript appears here as the call plays.</p>
+            <p class="t-empty" style="color:#B9AEAF">The transcript appears here as the call plays.</p>
           </div>
           <div class="voice-ctas">
-            <button class="btn btn-yellow" id="playCall">
+            <button class="btn btn-maroon" id="playCall">
               <svg width="18" height="18" aria-hidden="true"><use href="#i-mic"/></svg><span>Play demo call</span>
             </button>
-            <span class="num">(850) 555-0142</span>
+            <span class="num">(555) 010-4455</span>
           </div>
         </div>
 
@@ -453,22 +514,23 @@
             <h3>Kitchen ticket</h3>
             <span class="chip phone" id="ticketNo">Waiting for call</span>
           </div>
+          <span class="t-pickup" id="ticketPickup" hidden>Pickup: Friday 11:00 AM</span>
           <div class="ticket-lines" id="ticketLines"><p class="t-empty">Items the AI hears get added here.</p></div>
-          <div class="t-total"><span>Total</span><span id="ticketTotal">$0.00</span></div>
+          <div class="t-total"><span>Total with tax</span><span id="ticketTotal">$0.00</span></div>
           <ul class="sync-list" id="syncList">
-            <li data-k="0"><span class="dot"><svg width="12" height="12" style="color:#fff" aria-hidden="true"><use href="#i-check"/></svg></span>Caller matched to CRM contact</li>
-            <li data-k="1"><span class="dot"><svg width="12" height="12" style="color:#fff" aria-hidden="true"><use href="#i-check"/></svg></span>Order sent to kitchen screen</li>
-            <li data-k="2"><span class="dot"><svg width="12" height="12" style="color:#fff" aria-hidden="true"><use href="#i-check"/></svg></span>Order history and points updated</li>
-            <li data-k="3"><span class="dot"><svg width="12" height="12" style="color:#fff" aria-hidden="true"><use href="#i-check"/></svg></span>"Ready for pickup" text scheduled</li>
+            <li><span class="dot"><svg width="12" height="12" style="color:#fff" aria-hidden="true"><use href="#i-check"/></svg></span>Caller matched to HubSpot contact</li>
+            <li><span class="dot"><svg width="12" height="12" style="color:#fff" aria-hidden="true"><use href="#i-check"/></svg></span>Order sent to kitchen screen</li>
+            <li><span class="dot"><svg width="12" height="12" style="color:#fff" aria-hidden="true"><use href="#i-check"/></svg></span>Order history and points updated</li>
+            <li><span class="dot"><svg width="12" height="12" style="color:#fff" aria-hidden="true"><use href="#i-check"/></svg></span>"Ready for pickup" text scheduled</li>
           </ul>
         </div>
       </div>
 
       <div class="features">
-        <div class="feat"><b>Never misses a call</b><p>Handles the Friday rush, several callers at once, and after-hours pre-orders.</p></div>
-        <div class="feat"><b>Knows your regulars</b><p>Looks up the caller in your CRM and offers "the usual" by name.</p></div>
-        <div class="feat"><b>Upsells every time</b><p>Suggests combos, drinks and desserts the way your best cashier would.</p></div>
-        <div class="feat"><b>Hands off to staff</b><p>Transfers to a person for catering, complaints or anything it can't handle.</p></div>
+        <div class="feat"><b>Never misses a call</b><p>Handles the Thursday-night rush and several callers at once.</p></div>
+        <div class="feat"><b>Knows your regulars</b><p>Looks up the caller in HubSpot and offers "the usual" by name.</p></div>
+        <div class="feat"><b>Closes for Shabbos</b><p>Online and phone ordering pause for Shabbos and Yom Tov on their own, using your zmanim.</p></div>
+        <div class="feat"><b>Hands off to staff</b><p>Transfers to a person for catering, platters or anything it can't handle.</p></div>
       </div>
     </div>
   </section>
@@ -477,40 +539,40 @@
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <span class="eyebrow">Street Rewards</span>
+          <span class="eyebrow">Mechel's Rewards</span>
           <h2>Offers picked for each customer</h2>
-          <p>Every web, app and phone order lands in your CRM, so each signed-in customer sees their points, their usual order and deals based on what they actually buy.</p>
+          <p>Every web and phone order lands in HubSpot, so each signed-in customer sees their points, their usual order and deals based on what they actually buy.</p>
         </div>
       </div>
       <div class="rw-grid">
         <div class="member">
-          <span class="eyebrow" style="color:var(--mustard)">Signed in as Jordan R.</span>
-          <h3>You're 260 points from a free Double Stack.</h3>
+          <span class="eyebrow">Signed in as Dovid R.</span>
+          <h3>You're 260 points from a free pastrami sandwich.</h3>
           <div>
             <div class="points">1,240<small>points</small></div>
             <div class="bar" style="margin-top:14px"><i></i></div>
-            <div class="bar-labels"><span>Free fries · 800</span><span>Free burger · 1,500</span></div>
+            <div class="bar-labels"><span>Free kugel · 800</span><span>Free pastrami · 1,500</span></div>
           </div>
           <div class="usual">
-            <div><b>Your usual</b><span>Double Stack combo · Coke · extra pickles</span></div>
-            <button class="btn btn-yellow btn-sm" data-add="usual">Reorder · $11.29</button>
+            <div><b>Your usual</b><span>Pastrami on rye · deli mustard · black cherry soda</span></div>
+            <button class="btn btn-light btn-sm" data-add="usual">Reorder · $19.45</button>
           </div>
         </div>
         <div class="offers">
           <div class="offer">
-            <span class="pic"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#i-shake"/></svg></span>
-            <div><b>$1 off any shake</b><span>Expires Sunday</span><br><span class="why">You order shakes on weekends</span></div>
-            <button class="btn btn-red btn-sm" data-add="shake">Add</button>
+            <span class="pic"><svg viewBox="0 0 200 180" aria-hidden="true"><use href="#i-cholent"/></svg></span>
+            <div class="txt"><b>Pre-order cholent for Shabbos</b><span>$2 off a quart · order by Thursday</span><br><span class="why">You get cholent most weeks</span></div>
+            <button class="btn btn-maroon btn-sm" data-add="cholent">Add</button>
           </div>
           <div class="offer">
-            <span class="pic"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#i-fries"/></svg></span>
-            <div><b>Free large fries</b><span>Reward · 800 pts</span><br><span class="why">Unlocked</span></div>
-            <button class="btn btn-red btn-sm" data-add="fries">Redeem</button>
+            <span class="pic"><svg viewBox="0 0 200 170" aria-hidden="true"><use href="#i-kugel"/></svg></span>
+            <div class="txt"><b>Free potato kugel</b><span>Reward · 800 pts</span><br><span class="why">Unlocked</span></div>
+            <button class="btn btn-maroon btn-sm" data-add="kugel">Redeem</button>
           </div>
           <div class="offer">
-            <span class="pic"><svg viewBox="0 0 200 170" aria-hidden="true"><use href="#i-egg"/></svg></span>
-            <div><b>Try breakfast: 2x points</b><span>Before 10:30 AM</span><br><span class="why">You haven't tried breakfast yet</span></div>
-            <button class="btn btn-red btn-sm" data-add="egg">Add</button>
+            <span class="pic"><svg viewBox="0 0 200 170" aria-hidden="true"><use href="#i-soup"/></svg></span>
+            <div class="txt"><b>Matzo ball soup: 2x points</b><span>This week only</span><br><span class="why">You haven't tried the soup yet</span></div>
+            <button class="btn btn-maroon btn-sm" data-add="soup">Add</button>
           </div>
         </div>
       </div>
@@ -522,55 +584,55 @@
       <div class="sec-head">
         <div>
           <span class="eyebrow">Owner view · not shown to customers</span>
-          <h2>Every order flows into your CRM</h2>
-          <p>Web, app and phone orders become customer records automatically. You get one place to see who ordered, how often, and who you haven't seen in a while.</p>
+          <h2>Every order flows into HubSpot</h2>
+          <p>Web and phone orders become customer records automatically. You see who ordered, how often, and who you haven't seen in a while.</p>
         </div>
       </div>
 
       <div class="flow">
         <div class="flow-box">
           <h4>Orders come in</h4>
-          <ul><li>Website and mobile ordering</li><li>AI phone orders</li><li>Rewards sign-ups</li></ul>
+          <ul><li>Website ordering</li><li>AI phone orders</li><li>Shabbos pre-orders</li></ul>
         </div>
         <span class="flow-arrow" aria-hidden="true">→</span>
         <div class="flow-box crm">
-          <h4>Your CRM</h4>
+          <h4>HubSpot</h4>
           <ul><li>Contact created or matched by phone</li><li>Order history and spend</li><li>Tags: VIP, Lapsed, New</li></ul>
         </div>
         <span class="flow-arrow" aria-hidden="true">→</span>
         <div class="flow-box">
           <h4>You act on it</h4>
-          <ul><li>Kitchen display and pickup texts</li><li>"We miss you" offers to lapsed guests</li><li>Birthday and loyalty emails</li></ul>
+          <ul><li>Kitchen screen and pickup texts</li><li>Wednesday "order for Shabbos" reminders</li><li>Yom Tov menus to past customers</li></ul>
         </div>
       </div>
 
       <div class="dash">
         <div class="dash-top">
-          <span>Today · Saturday, Sep 27</span>
-          <span class="live"><i></i>Synced with CRM · sample data</span>
+          <span>Sample day · Thursday</span>
+          <span class="live"><i></i>Synced with HubSpot · sample data</span>
         </div>
         <div class="kpis">
-          <div class="kpi"><span>Orders</span><b>184</b><em>+12% vs last Sat</em></div>
-          <div class="kpi"><span>Phone orders by AI</span><b>41</b><em>0 missed calls</em></div>
-          <div class="kpi"><span>Repeat customers</span><b>63%</b><em>+4 pts this month</em></div>
-          <div class="kpi"><span>Average ticket</span><b>$14.20</b><em>+$1.10 from upsells</em></div>
+          <div class="kpi"><span>Orders</span><b>212</b><em>+14% vs last Thu</em></div>
+          <div class="kpi"><span>Phone orders by AI</span><b>57</b><em>0 missed calls</em></div>
+          <div class="kpi"><span>Shabbos pre-orders</span><b>64</b><em>38 quarts of cholent</em></div>
+          <div class="kpi"><span>Average ticket</span><b>$24.80</b><em>+$2.10 from add-ons</em></div>
         </div>
         <div class="dash-body">
           <div class="chart">
             <h4>Orders by hour</h4>
-            <svg id="chart" viewBox="0 0 400 210" role="img" aria-label="Stacked bar chart of orders per hour from 11 AM to 9 PM, split into web and phone orders"></svg>
-            <div class="legend"><span><i style="background:var(--red)"></i>Web and app</span><span><i style="background:var(--mustard)"></i>AI phone</span></div>
+            <svg id="chart" viewBox="0 0 400 210" role="img" aria-label="Stacked bar chart of orders per hour from 10 AM to 9 PM, split into web and phone orders"></svg>
+            <div class="legend"><span><i style="background:var(--maroon)"></i>Website</span><span><i style="background:var(--black)"></i>AI phone</span></div>
           </div>
           <div class="table-wrap">
             <h4>Recent customers</h4>
             <table>
               <thead><tr><th>Customer</th><th>Channel</th><th>Last order</th><th>Visits</th><th>CRM tag</th></tr></thead>
               <tbody>
-                <tr><td>Jordan R.</td><td><span class="chip">Web</span></td><td>Double Stack combo</td><td>38</td><td><span class="chip vip">VIP</span></td></tr>
-                <tr><td>Maria L.</td><td><span class="chip phone">Phone</span></td><td>Family Box</td><td>12</td><td><span class="chip">Regular</span></td></tr>
-                <tr><td>Dev P.</td><td><span class="chip phone">Phone</span></td><td>2x Nuggets 10pc</td><td>1</td><td><span class="chip new">New</span></td></tr>
-                <tr><td>Sam K.</td><td><span class="chip">App</span></td><td>Classic, shake</td><td>21</td><td><span class="chip">Regular</span></td></tr>
-                <tr><td>Alex T.</td><td><span class="chip">Web</span></td><td>Last seen 46 days ago</td><td>9</td><td><span class="chip lapsed">Lapsed</span></td></tr>
+                <tr><td>Dovid R.</td><td><span class="chip">Web</span></td><td>Pastrami on rye</td><td>38</td><td><span class="chip vip">VIP</span></td></tr>
+                <tr><td>Rivka L.</td><td><span class="chip phone">Phone</span></td><td>2 qt cholent, kugel</td><td>12</td><td><span class="chip">Regular</span></td></tr>
+                <tr><td>Moshe P.</td><td><span class="chip phone">Phone</span></td><td>3x Deli Combo</td><td>1</td><td><span class="chip new">New</span></td></tr>
+                <tr><td>Sara K.</td><td><span class="chip">Web</span></td><td>Turkey sandwich, soup</td><td>21</td><td><span class="chip">Regular</span></td></tr>
+                <tr><td>Yossi T.</td><td><span class="chip">Web</span></td><td>Last seen 46 days ago</td><td>9</td><td><span class="chip lapsed">Lapsed</span></td></tr>
               </tbody>
             </table>
           </div>
@@ -582,12 +644,12 @@
   <section class="loc" id="location">
     <div class="wrap">
       <div>
-        <span class="eyebrow" style="color:var(--ink)">Pickup location</span>
-        <h2 style="font-size:clamp(32px,4.4vw,48px);font-weight:800;margin-top:6px">214 Palafox St</h2>
-        <p style="margin-top:12px;max-width:440px">Order ahead and grab it from the pickup shelf by the door. Curbside available: tap "I'm here" in your pickup text.</p>
+        <span class="eyebrow">Pickup location</span>
+        <h2 style="font-size:clamp(32px,4.4vw,48px);font-weight:800;margin-top:6px">214 Main St</h2>
+        <p style="margin-top:12px;max-width:440px">Order ahead and grab it from the pickup shelf by the door. Shabbos pre-orders are ready Friday morning.</p>
         <div class="hero-ctas">
-          <a class="btn btn-red" href="#menu">Start an order</a>
-          <a class="btn btn-ghost" href="https://www.google.com/maps" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn-light" href="#menu">Start an order</a>
+          <a class="btn btn-ghost on-dark" href="https://www.google.com/maps" target="_blank" rel="noopener">Get directions</a>
         </div>
       </div>
       <div class="hours" id="hours"></div>
@@ -599,14 +661,14 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <span class="logo-word" style="color:#fff">Bun Street</span>
-        <p style="margin-top:10px;max-width:280px">Smash burgers, fries and shakes for pickup. Order online, in the app, or by phone.</p>
+        <span class="logo-word" style="color:#fff">Mechel's Takeout</span>
+        <p style="margin-top:10px;max-width:280px">Glatt kosher deli for pickup. Under the supervision of [Kashrus Agency]. Order online or by phone.</p>
       </div>
       <div><h5>Order</h5><ul><li><a href="#menu">Menu</a></li><li><a href="#voice">Order by phone</a></li><li><a href="#rewards">Rewards</a></li></ul></div>
-      <div><h5>Company</h5><ul><li><a href="#location">Location and hours</a></li><li><a href="#top">Catering</a></li><li><a href="#top">Careers</a></li></ul></div>
-      <div><h5>Help</h5><ul><li><a href="#top">Nutrition and allergens</a></li><li><a href="#top">Contact us</a></li><li><a href="#top">Privacy</a></li></ul></div>
+      <div><h5>About</h5><ul><li><a href="#location">Hours and location</a></li><li><a href="#top">Catering and platters</a></li><li><a href="#top">Kashrus certificate</a></li></ul></div>
+      <div><h5>Help</h5><ul><li><a href="#top">Allergens</a></li><li><a href="#top">Contact us</a></li><li><a href="#top">Privacy</a></li></ul></div>
     </div>
-    <div class="foot-bottom"><span>© 2026 Bun Street (placeholder brand)</span><span>Design preview v1</span></div>
+    <div class="foot-bottom"><span>© 2026 Mechel's Takeout</span><span>Design preview v2</span></div>
   </div>
 </footer>
 
@@ -615,11 +677,17 @@
   <div class="drawer-head"><h3>Your bag</h3><button class="x" id="closeCart" aria-label="Close bag">×</button></div>
   <div class="lines" id="lines"></div>
   <form id="checkout">
-    <div class="sum"><span>Total</span><span id="sum">$0.00</span></div>
+    <div class="sum"><span>Subtotal</span><span id="sum">$0.00</span></div>
+    <label for="pickup">Pickup time</label>
+    <select id="pickup">
+      <option>As soon as possible (about 15 min)</option>
+      <option>Today, 6:00 PM</option>
+      <option>Friday, 11:00 AM (Shabbos pre-order)</option>
+    </select>
     <label for="phone">Mobile number</label>
-    <input id="phone" type="tel" placeholder="(850) 555-0123" value="(850) 555-0199">
-    <p class="hint">Used for your pickup text. It links this order to your rewards in our CRM.</p>
-    <button class="btn btn-red" style="width:100%;margin-top:14px" type="submit">Place pickup order</button>
+    <input id="phone" type="tel" placeholder="(555) 010-0000" value="(555) 010-7788">
+    <p class="hint">For your pickup text. It links this order to your rewards.</p>
+    <button class="btn btn-maroon" style="width:100%;margin-top:14px" type="submit">Place pickup order</button>
     <div class="ok-box" id="okBox" hidden></div>
   </form>
 </aside>
@@ -627,17 +695,20 @@
 <script>
 (function(){
   const MENU = [
-    {id:'double', cat:'Burgers', name:'Double Stack', desc:'Two smashed patties, American, pickles, Street Sauce.', price:7.49, cal:780, icon:'i-burger', vb:'0 0 200 170', bg:'#FFE7A3', badge:'Back this week'},
-    {id:'classic', cat:'Burgers', name:'The Classic', desc:'Single patty, lettuce, tomato, onion, ketchup, mustard.', price:5.29, cal:520, icon:'i-burger', vb:'0 0 200 170', bg:'#FDE3E1'},
-    {id:'nuggets', cat:'Chicken', name:'Crispy Nuggets 10pc', desc:'All-white meat, with two dipping sauces.', price:6.49, cal:470, icon:'i-nuggets', vb:'0 0 200 200', bg:'#FFE7A3'},
-    {id:'fries', cat:'Sides', name:'Street Fries', desc:'Skin-on, double fried, sea salt.', price:3.19, cal:380, icon:'i-fries', vb:'0 0 200 200', bg:'#FDE3E1'},
-    {id:'drink', cat:'Drinks', name:'Fountain Drink', desc:'Coke, Diet Coke, Sprite or sweet tea.', price:2.29, cal:210, icon:'i-drink', vb:'0 0 200 200', bg:'#E3F2E6'},
-    {id:'shake', cat:'Desserts', name:'Strawberry Shake', desc:'Real strawberries, soft serve, whipped cream.', price:4.49, cal:610, icon:'i-shake', vb:'0 0 200 200', bg:'#FDE3E1'},
-    {id:'egg', cat:'Breakfast', name:'Sunrise Egg Muffin', desc:'Fried egg, ham, cheese, toasted muffin. Until 10:30 AM.', price:4.29, cal:330, icon:'i-egg', vb:'0 0 200 170', bg:'#FFE7A3'},
-    {id:'combo', cat:'Burgers', name:'Double Stack Combo', desc:'Double Stack, medium fries and a drink.', price:11.29, cal:1370, icon:'i-burger', vb:'0 0 200 170', bg:'#E3F2E6', badge:'Best value'}
+    {id:'pastrami', cat:'Sandwiches', name:'Pastrami on Rye', desc:'Hand-sliced hot pastrami, deli mustard, fresh seeded rye.', price:16.95, unit:'Sandwich', icon:'i-sandwich', vb:'0 0 200 170', bg:'#F6E8EA', badge:'House favorite'},
+    {id:'cornedbeef', cat:'Sandwiches', name:'Corned Beef on Rye', desc:'Lean corned beef, deli mustard, seeded rye.', price:15.95, unit:'Sandwich', icon:'i-sandwich', vb:'0 0 200 170', bg:'#EFEAEA'},
+    {id:'turkey', cat:'Sandwiches', name:'Turkey Sandwich', desc:'Oven-roasted turkey, lettuce, tomato, mayo, on challah roll or rye.', price:14.50, unit:'Sandwich', icon:'i-sandwich', vb:'0 0 200 170', bg:'#F6E8EA'},
+    {id:'combo', cat:'Sandwiches', name:'Deli Combo', desc:'Any sandwich, a potato knish, pickle and a soda.', price:21.95, unit:'Meal', icon:'i-sandwich', vb:'0 0 200 170', bg:'#EFEAEA', badge:'Best value'},
+    {id:'cholent', cat:'Hot Food', name:'Cholent', desc:'Beef, beans, barley and potato, slow-cooked with kishke. Thursday and Friday.', price:12.95, unit:'Quart', icon:'i-cholent', vb:'0 0 200 180', bg:'#F6E8EA', badge:'For Shabbos'},
+    {id:'kugel', cat:'Hot Food', name:'Potato Kugel', desc:'Crispy edges, soft inside. Pareve.', price:4.95, unit:'Slice', icon:'i-kugel', vb:'0 0 200 170', bg:'#EFEAEA'},
+    {id:'knish', cat:'Hot Food', name:'Potato Knish', desc:'Baked, golden, stuffed with seasoned potato and onion.', price:4.25, unit:'Each', icon:'i-knish', vb:'0 0 200 170', bg:'#F6E8EA'},
+    {id:'soup', cat:'Soups', name:'Matzo Ball Soup', desc:'Chicken broth, carrots, dill, two fluffy matzo balls.', price:7.50, unit:'Pint', icon:'i-soup', vb:'0 0 200 170', bg:'#EFEAEA'},
+    {id:'pickles', cat:'Sides', name:'Pickles and Coleslaw', desc:'Half-sour and full-sour pickles with house coleslaw.', price:3.50, unit:'Side', icon:'i-pickle', vb:'0 0 200 170', bg:'#F6E8EA'},
+    {id:'soda', cat:'Drinks', name:"Dr. Brown's Soda", desc:'Black cherry, cream or Cel-Ray.', price:2.50, unit:'Can', icon:'i-soda', vb:'0 0 200 200', bg:'#EFEAEA'},
+    {id:'cookie', cat:'Desserts', name:'Black and White Cookie', desc:'Soft cake cookie, half vanilla, half chocolate. Pareve.', price:3.25, unit:'Each', icon:'i-cookie', vb:'0 0 200 200', bg:'#F6E8EA'},
+    {id:'rugelach', cat:'Desserts', name:'Chocolate Rugelach', desc:'Flaky, rolled, baked fresh daily. Pareve.', price:6.95, unit:'Half dozen', icon:'i-rugelach', vb:'0 0 200 170', bg:'#EFEAEA'}
   ];
   const byId = Object.fromEntries(MENU.map(m=>[m.id,m]));
-  byId.usual = byId.combo;
   const money = n => '$' + n.toFixed(2);
 
   // Menu
@@ -656,7 +727,7 @@
         <h3>${m.name}</h3>
         <p class="desc">${m.desc}</p>
         <div class="row">
-          <div><div class="price">${money(m.price)}</div><div class="cal">${m.cal} Cal</div></div>
+          <div><div class="price">${money(m.price)}</div><div class="unit">${m.unit}</div></div>
           <button class="add" data-add="${m.id}" aria-label="Add ${m.name} to bag"><svg width="18" height="18" aria-hidden="true"><use href="#i-plus"/></svg></button>
         </div>
       </article>`).join('');
@@ -667,7 +738,7 @@
   });
   renderTabs(); renderMenu();
 
-  // Cart
+  // Bag
   const cart = {};
   const countEl = document.getElementById('cartCount');
   const drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
@@ -686,11 +757,12 @@
     document.getElementById('sum').textContent = money(total);
     countEl.textContent = ids.reduce((s,id)=>s+cart[id],0);
   }
+  function add(id){ cart[id] = (cart[id]||0)+1; }
   document.addEventListener('click', e=>{
     const a = e.target.closest('[data-add]');
     if(a){
-      const id = a.dataset.add === 'usual' ? 'combo' : a.dataset.add;
-      cart[id] = (cart[id]||0)+1; renderCart();
+      if(a.dataset.add === 'usual'){ add('pastrami'); add('soda'); } else { add(a.dataset.add); }
+      renderCart();
       if(a.classList.contains('add')){
         a.classList.add('done'); a.innerHTML = '<svg width="18" height="18" aria-hidden="true"><use href="#i-check"/></svg>';
         setTimeout(()=>{a.classList.remove('done'); a.innerHTML='<svg width="18" height="18" aria-hidden="true"><use href="#i-plus"/></svg>';},900);
@@ -710,7 +782,7 @@
     const box = document.getElementById('okBox');
     const n = Object.values(cart).reduce((s,v)=>s+v,0);
     box.hidden = false;
-    box.textContent = n ? 'Preview only: in the real site this places order #1043, texts the customer, and adds it to their CRM record.' : 'Add at least one item first.';
+    box.textContent = n ? 'Preview only: the real site would place the order, text the customer, and add it to their HubSpot record.' : 'Add at least one item first.';
   });
 
   // Mobile nav
@@ -722,27 +794,32 @@
   const wave = document.getElementById('wave');
   wave.innerHTML = Array.from({length:32},(_,i)=>`<i style="animation-delay:${(i*37%500)/1000}s"></i>`).join('');
   const SCRIPT = [
-    {who:'ai', t:"Thanks for calling Bun Street on Palafox! Hi Jordan, good to hear from you again. Want your usual Double Stack combo?", sync:0},
-    {who:'cx', t:"Yeah, the usual. And add a ten-piece nuggets for my kid."},
-    {who:'ai', t:"Got it: one Double Stack combo with a Coke and extra pickles, plus 10-piece nuggets. Which sauces with the nuggets?", add:['combo','nuggets']},
-    {who:'cx', t:"Ranch and honey mustard."},
-    {who:'ai', t:"Perfect. You also have a dollar off any shake this weekend. Want a strawberry shake for $3.49?"},
+    {who:'ai', t:"Thanks for calling Mechel's! Hi Dovid, good to hear from you. Want your usual pastrami on rye?", sync:0},
+    {who:'cx', t:"Yes, and add a quart of cholent for Shabbos."},
+    {who:'ai', t:"Got it: pastrami on rye with deli mustard, and a quart of cholent with kishke. When do you want to pick up?", add:['pastrami','cholent']},
+    {who:'cx', t:"Friday morning, around eleven."},
+    {who:'ai', t:"Friday at 11 it is. You also have a free potato kugel with your points. Want to use it?", pickup:true},
     {who:'cx', t:"Sure, why not."},
-    {who:'ai', t:"Added. Your total is $21.27 and it'll be ready in about 12 minutes. I'll text you when it's on the pickup shelf.", add:['shake'], sync:1},
-    {who:'cx', t:"Awesome, thanks!"},
-    {who:'ai', t:"See you soon, Jordan!", sync:3}
+    {who:'ai', t:"Added. Your total is $32.14. I'll text you Friday when it's on the pickup shelf.", add:['kugelfree'], sync:1},
+    {who:'cx', t:"Thanks, good Shabbos."},
+    {who:'ai', t:"Good Shabbos, Dovid!", sync:3}
   ];
-  const PRICES = {combo:11.29, nuggets:6.49, shake:3.49};
-  const NAMES = {combo:'Double Stack Combo · Coke, extra pickles', nuggets:'Nuggets 10pc · ranch, honey mustard', shake:'Strawberry Shake · $1 reward'};
-  const tr = document.getElementById('transcript'), lines = document.getElementById('ticketLines');
+  const LINES = {
+    pastrami:['Pastrami on Rye · deli mustard', 16.95],
+    cholent:['Cholent · 1 quart, with kishke', 12.95],
+    kugelfree:['Potato Kugel · points reward', 0]
+  };
+  const tr = document.getElementById('transcript'), tl = document.getElementById('ticketLines');
   const stateEl = document.getElementById('callState'), playBtn = document.getElementById('playCall');
   const syncItems = document.querySelectorAll('#syncList li');
+  const pickupEl = document.getElementById('ticketPickup');
   let timers = [], clock;
   function reset(){
     timers.forEach(clearTimeout); timers = []; clearInterval(clock);
-    tr.innerHTML = ''; lines.innerHTML = '<p class="t-empty">Items the AI hears get added here.</p>';
+    tr.innerHTML = ''; tl.innerHTML = '<p class="t-empty">Items the AI hears get added here.</p>';
     document.getElementById('ticketTotal').textContent = '$0.00';
     document.getElementById('ticketNo').textContent = 'Waiting for call';
+    pickupEl.hidden = true;
     syncItems.forEach(li=>li.classList.remove('ok'));
   }
   function play(){
@@ -758,15 +835,16 @@
         d.innerHTML = `<small>${s.who==='ai'?'AI order-taker':'Caller'}</small>` + s.t;
         tr.appendChild(d); tr.scrollTop = tr.scrollHeight;
         if(s.add){
-          if(first){ lines.innerHTML=''; first=false; document.getElementById('ticketNo').textContent = 'Order #1042'; }
+          if(first){ tl.innerHTML=''; first=false; document.getElementById('ticketNo').textContent = 'Order #2187'; }
           s.add.forEach(id=>{
-            total += PRICES[id];
+            const [nm, pr] = LINES[id]; total += pr;
             const l = document.createElement('div'); l.className='t-line';
-            l.innerHTML = `<span>${NAMES[id]}</span><b>${money(PRICES[id])}</b>`;
-            lines.appendChild(l);
+            l.innerHTML = `<span>${nm}</span><b>${money(pr)}</b>`;
+            tl.appendChild(l);
           });
-          document.getElementById('ticketTotal').textContent = money(total * 1.075);
+          document.getElementById('ticketTotal').textContent = money(Math.round(total*1.075*100)/100);
         }
+        if(s.pickup) pickupEl.hidden = false;
         if(s.sync!==undefined){ for(let k=0;k<=s.sync;k++) syncItems[k].classList.add('ok'); }
         if(i===SCRIPT.length-1){
           timers.push(setTimeout(()=>{ clearInterval(clock); wave.classList.remove('on'); stateEl.classList.remove('live'); stateEl.textContent='Call ended'; },900));
@@ -777,26 +855,27 @@
   playBtn.addEventListener('click', play);
 
   // Chart: orders by hour, stacked web + phone
-  const data = [[11,9,3],[12,22,6],[13,18,5],[14,8,2],[15,6,2],[16,9,3],[17,17,6],[18,24,7],[19,19,5],[20,8,2],[21,3,0]];
-  const W=400,H=210,L=28,R=6,T=10,B=26, max=35;
+  const data = [[10,6,3],[11,14,5],[12,24,8],[13,20,6],[14,9,3],[15,7,2],[16,10,4],[17,18,7],[18,26,9],[19,21,6],[20,9,3]];
+  const W=400,H=210,L=28,R=6,T=10,B=26, max=40;
   const ch = document.getElementById('chart');
   const y = v => T + (H-T-B) * (1 - v/max);
   const bw = (W-L-R)/data.length;
   let s = '';
-  [0,10,20,30].forEach(v=>{ s += `<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#E9E4DA" stroke-width="1"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="10" fill="#5B574E">${v}</text>`; });
+  [0,10,20,30,40].forEach(v=>{ s += `<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#E9E1E2" stroke-width="1"/><text x="${L-6}" y="${y(v)+4}" text-anchor="end" font-size="10" fill="#5E5557">${v}</text>`; });
   data.forEach(([h,w,p],i)=>{
     const x = L + i*bw + bw*0.18, wd = bw*0.64;
-    s += `<rect x="${x}" y="${y(w)}" width="${wd}" height="${y(0)-y(w)}" fill="#DA291C" rx="2"/>`;
-    if(p) s += `<rect x="${x}" y="${y(w+p)}" width="${wd}" height="${y(w)-y(w+p)}" fill="#FFBC0D" rx="2"/>`;
-    if(i%2===0) s += `<text x="${x+wd/2}" y="${H-8}" text-anchor="middle" font-size="10" fill="#5B574E">${h>12?h-12:h}${h>=12?'p':'a'}</text>`;
+    s += `<rect x="${x}" y="${y(w)}" width="${wd}" height="${y(0)-y(w)}" fill="#7B1E2E" rx="2"/>`;
+    s += `<rect x="${x}" y="${y(w+p)}" width="${wd}" height="${y(w)-y(w+p)}" fill="#141112" rx="2"/>`;
+    if(i%2===0) s += `<text x="${x+wd/2}" y="${H-8}" text-anchor="middle" font-size="10" fill="#5E5557">${h>12?h-12:h}${h>=12?'p':'a'}</text>`;
   });
   ch.innerHTML = s;
 
-  // Hours
+  // Hours (closed for Shabbos)
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const hrs = ['10 AM – 10 PM','10 AM – 10 PM','10 AM – 10 PM','10 AM – 10 PM','10 AM – 11 PM','10 AM – 12 AM','9 AM – 12 AM'];
+  const hrs = ['11 AM – 9 PM','11 AM – 9 PM','11 AM – 9 PM','11 AM – 9 PM','11 AM – 10 PM','9 AM – 2 PM','Closed for Shabbos'];
   const today = new Date().getDay();
-  const order = [1,2,3,4,5,6,0];
-  document.getElementById('hours').innerHTML = order.map(d=>`<div class="${d===today?'today':''}"><span>${days[d]}${d===today?' · today':''}</span><span>${hrs[d]}</span></div>`).join('');
+  const order = [0,1,2,3,4,5,6];
+  document.getElementById('hours').innerHTML = order.map(d=>`<div class="${d===today?'today':''} ${d===6?'closed':''}"><span>${days[d]}${d===today?' · today':''}</span><span>${hrs[d]}</span></div>`).join('') +
+    '<p>Friday hours end earlier in winter, based on candle-lighting time. Closed on Yom Tov.</p>';
 })();
 </script>
