@@ -1,4 +1,4 @@
-<title>Gulf Coast Home Finder</title>
+<title>Lakewood Area Homes</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -168,7 +168,7 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
   <div class="wrap">
     <a class="brand" href="#search">
       <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="var(--brand)"/><path d="M9 21 20 11l11 10v9a1 1 0 0 1-1 1h-6v-7h-8v7h-6a1 1 0 0 1-1-1z" fill="var(--brand-ink)"/><circle cx="29" cy="12" r="3.2" fill="var(--sun)"/></svg>
-      <span><b id="brandName">Gulf Coast Home Finder</b><small id="brandSub">with your agent</small></span>
+      <span><b id="brandName">Lakewood Area Homes</b><small id="brandSub">with your agent</small></span>
     </a>
     <nav class="tabs" aria-label="Sections">
       <a href="#search">Homes</a>
@@ -186,15 +186,15 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
     <div class="lede">
       <div>
         <h1 id="searchTitle">Homes picked for you</h1>
-        <p id="searchSub">Sorted by how well each home fits your wish list, including the walk to shul. Monthly estimates include Florida taxes and insurance.</p>
+        <p id="searchSub">Sorted by how well each home fits your wish list, including the walk to shul. Monthly estimates include New Jersey property taxes and insurance.</p>
       </div>
       <span class="sample">Sample listings</span>
     </div>
     <div class="filters">
       <div><label for="fArea">Area</label><select id="fArea"><option value="">All areas</option></select></div>
-      <div><label for="fMax">Max price</label><select id="fMax"><option value="">Any</option><option>300000</option><option>400000</option><option>500000</option><option>650000</option><option>800000</option><option>1000000</option></select></div>
+      <div><label for="fMax">Max price</label><select id="fMax"><option value="">Any</option><option>500000</option><option>650000</option><option>800000</option><option>1000000</option><option>1250000</option><option>1500000</option></select></div>
       <div><label for="fBeds">Beds</label><select id="fBeds"><option value="0">Any</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
-      <div><label for="fType">Type</label><select id="fType"><option value="">Any</option><option>House</option><option>Condo</option><option>Townhome</option></select></div>
+      <div><label for="fType">Type</label><select id="fType"><option value="">Any</option><option>House</option><option>Condo</option><option>Townhome</option><option>Duplex</option></select></div>
       <div><label for="fShul">Walk to shul</label><select id="fShul"><option value="0">Any distance</option><option value="10">10 min or less</option><option value="15">15 min or less</option><option value="20">20 min or less</option></select></div>
       <div><label for="fSort">Sort</label><select id="fSort"><option value="match">Best match</option><option value="shul">Closest synagogue</option><option value="new">Newest</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="pay">Monthly payment</option></select></div>
     </div>
@@ -208,15 +208,15 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
       <div class="pane">
         <h2>Budget &amp; size</h2>
         <div class="fields">
-          <div class="field full"><label for="pBudget">Comfortable price: <span id="pBudgetOut" class="num"></span></label><input type="range" id="pBudget" min="200000" max="1200000" step="10000"></div>
-          <div class="field"><label for="pBeds">Bedrooms (min)</label><select id="pBeds"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-          <div class="field"><label for="pBaths">Bathrooms (min)</label><select id="pBaths"><option>1</option><option>1.5</option><option>2</option><option>2.5</option><option>3</option></select></div>
+          <div class="field full"><label for="pBudget">Comfortable price: <span id="pBudgetOut" class="num"></span></label><input type="range" id="pBudget" min="300000" max="1600000" step="10000"></div>
+          <div class="field"><label for="pBeds">Bedrooms (min)</label><select id="pBeds"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></div>
+          <div class="field"><label for="pBaths">Bathrooms (min)</label><select id="pBaths"><option>1</option><option>1.5</option><option>2</option><option>2.5</option><option>3</option><option>3.5</option></select></div>
         </div>
       </div>
       <div class="pane"><h2>Where you'd like to live</h2><div class="opts" id="pAreas"></div></div>
       <div class="pane"><h2>Shul &amp; community</h2>
         <div class="field"><label for="pShul">Walk to synagogue for Shabbat</label><select id="pShul"><option value="0">Doesn't matter</option><option value="10">Within 10 minutes</option><option value="15">Within 15 minutes</option><option value="20">Within 20 minutes</option><option value="30">Within 30 minutes</option></select></div>
-        <p class="sub">Synagogue type (pick none for any)</p><div class="opts" id="pDenoms"></div>
+        <p class="sub">Shul type (pick none for any)</p><div class="opts" id="pDenoms"></div>
         <p class="sub">Also close by</p><div class="opts" id="pCommunity"></div>
       </div>
       <div class="pane"><h2>Must-haves</h2><div class="opts" id="pFeatures"></div></div>
@@ -227,7 +227,7 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
 
   <!-- MORTGAGE -->
   <section class="view" id="v-mortgage" hidden>
-    <div class="lede"><div><h1>What will it really cost?</h1><p>The full monthly picture, including the costs the big sites tend to lowball in Florida: homeowner's insurance, flood insurance and HOA.</p></div>
+    <div class="lede"><div><h1>What will it really cost?</h1><p>The full monthly picture. New Jersey property taxes are often around 2% of the price a year in this area, so they make a big difference to the payment.</p></div>
       <div class="seg" role="group" aria-label="Calculator mode"><button type="button" id="mPay" aria-pressed="true">Monthly payment</button><button type="button" id="mAfford" aria-pressed="false">What can I afford?</button></div>
     </div>
     <div class="calc">
@@ -276,11 +276,11 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
   </section>
 
   <div class="agent" style="margin-top:32px">
-    <div class="av" id="agentInit">JA</div>
+    <div class="av" id="agentInit">FZ</div>
     <div style="flex:1">
-      <b id="agentName">Jordan Avery, REALTOR®</b>
-      <span id="agentBrok">Your Brokerage Name · Pensacola, FL</span><br>
-      <span class="contact num" id="agentPhone">(850) 555-0142</span> · <span class="contact" id="agentEmail">agent@example.com</span>
+      <b id="agentName">Fradie Zeilingold, REALTOR®</b>
+      <span id="agentBrok">Your Brokerage Name · Lakewood, NJ</span><br>
+      <span class="contact num" id="agentPhone">(732) 555-0142</span> · <span class="contact" id="agentEmail">agent@example.com</span>
     </div>
     <button class="btn btn-sun" type="button" id="copyPhone">Copy phone number</button>
   </div>
@@ -303,55 +303,65 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
 
 <script>
 /* ---------- config: change these for the real agent ---------- */
-const AGENT = { name:"Fradie Zeilingold", title:"REALTOR®", brokerage:"Your Brokerage Name", market:"Pensacola, FL", phone:"(850) 555-0142", email:"agent@example.com" };
+const AGENT = { name:"Fradie Zeilingold", title:"REALTOR®", brokerage:"Your Brokerage Name", market:"Lakewood, NJ", phone:"(732) 555-0142", email:"agent@example.com" };
 
 /* ---------- sample data (fictional) ---------- */
-const AREAS = ["East Hill","Downtown","Cordova Park","Gulf Breeze","Pace","Navarre","Perdido Key","Milton"];
-const FEATURES = ["Pool","Garage","Waterfront","Big yard","New build","Updated kitchen","Home office","Near beach","Top schools","Single story"];
+const AREAS = ["Lakewood – Westgate","Lakewood – Sunset","Lakewood – Downtown","Jackson","Howell","Toms River","Brick"];
+const FEATURES = ["Finished basement","Pesach kitchen","Sukkah deck","Large dining room","Main-floor bedroom","Garage","Big yard","New build","Updated kitchen","Home office"];
+/* x/y = rough miles from downtown Lakewood; tax = effective property tax %/yr; eruv = sample flag */
 const L = [
- {id:"a1",price:489000,beds:3,baths:2,sqft:1840,type:"House",area:"East Hill",addr:"1418 N 12th Ave",year:1948,days:2,f:["Updated kitchen","Big yard","Home office"],hoa:0,flood:0,c:["#7fa9b8","#f3e6cf"],desc:"Classic East Hill bungalow with a deep front porch, original heart-pine floors and a fenced yard with room for a pool."},
- {id:"a2",price:365000,beds:3,baths:2,sqft:1620,type:"House",area:"Pace",addr:"4862 Ridgeline Ct",year:2021,days:5,f:["New build","Garage","Single story","Top schools"],hoa:45,flood:0,c:["#9bb7a2","#eceae4"],desc:"Nearly-new single story in a quiet cul-de-sac, zoned for top-rated Santa Rosa County schools."},
- {id:"a3",price:829000,beds:4,baths:3,sqft:2610,type:"House",area:"Gulf Breeze",addr:"203 Sabine Dr",year:1994,days:9,f:["Pool","Waterfront","Garage","Top schools"],hoa:0,flood:1900,c:["#e6b98a","#f6efe3"],desc:"Sound-front home with a private dock, screened saltwater pool and sunset views across Santa Rosa Sound."},
- {id:"a4",price:299000,beds:2,baths:2,sqft:1110,type:"Condo",area:"Downtown",addr:"220 S Palafox Pl #504",year:2008,days:1,f:["Updated kitchen","Single story"],hoa:410,flood:0,c:["#b7a8c9","#ecebf2"],desc:"Fifth-floor condo a block off Palafox with a balcony over the bay, gated parking and a rooftop pool."},
- {id:"a5",price:549000,beds:4,baths:2.5,sqft:2280,type:"House",area:"Cordova Park",addr:"3106 Pinewood Ln",year:1972,days:14,f:["Pool","Big yard","Top schools","Garage"],hoa:0,flood:0,c:["#8fb0d1","#eef1f4"],desc:"Mid-century ranch on a third of an acre with a refinished pool and a brand-new roof (2025)."},
- {id:"a6",price:439000,beds:3,baths:2.5,sqft:1760,type:"Townhome",area:"Navarre",addr:"7520 Gulf Blvd #3",year:2016,days:6,f:["Near beach","Garage","Pool"],hoa:325,flood:1400,c:["#f0c6a1","#f8f2ea"],desc:"Three-story townhome steps from Navarre Beach with a community pool and a rooftop deck."},
- {id:"a7",price:689000,beds:3,baths:3,sqft:1950,type:"Condo",area:"Perdido Key",addr:"13753 Perdido Key Dr #1102",year:2005,days:21,f:["Waterfront","Near beach","Pool"],hoa:780,flood:0,c:["#86c1c0","#eef6f5"],desc:"Gulf-front corner unit with wraparound balcony, two pools and direct beach access."},
- {id:"a8",price:275000,beds:3,baths:2,sqft:1380,type:"House",area:"Milton",addr:"6011 Sycamore St",year:1998,days:3,f:["Big yard","Single story","Garage"],hoa:0,flood:0,c:["#c4b28c","#f2efe6"],desc:"Move-in ready brick home on a half acre with a workshop and room for an RV."},
- {id:"a9",price:415000,beds:4,baths:3,sqft:2140,type:"House",area:"Pace",addr:"3390 Wildflower Way",year:2023,days:4,f:["New build","Garage","Home office","Top schools"],hoa:60,flood:0,c:["#a6c3b4","#eff3f0"],desc:"Builder's-warranty home with a flex room set up as an office and a covered back patio."},
- {id:"a10",price:975000,beds:5,baths:4,sqft:3420,type:"House",area:"Gulf Breeze",addr:"16 Shoreline Cir",year:2012,days:11,f:["Pool","Waterfront","Garage","Updated kitchen","Top schools"],hoa:85,flood:2300,c:["#d9a27a","#f7efe7"],desc:"Bay-front home with chef's kitchen, summer kitchen by the pool, and a boat lift."},
- {id:"a11",price:519000,beds:3,baths:2,sqft:1690,type:"House",area:"East Hill",addr:"910 E Jordan St",year:2019,days:7,f:["New build","Updated kitchen","Home office"],hoa:0,flood:0,c:["#93a7c4","#eef0f5"],desc:"Modern farmhouse infill build, walk to Bayview Park and the Saturday market."},
- {id:"a12",price:349000,beds:2,baths:2.5,sqft:1420,type:"Townhome",area:"Downtown",addr:"611 N Barcelona St",year:2014,days:10,f:["Garage","Updated kitchen"],hoa:150,flood:0,c:["#c9a0a0","#f5eeee"],desc:"Brick townhome in North Hill with garage parking and a private courtyard."},
+ {id:"b1",price:1150000,beds:6,baths:3.5,sqft:3600,type:"House",area:"Lakewood – Westgate",addr:"18 Cedarview Dr",year:2019,days:2,f:["Finished basement","Pesach kitchen","Sukkah deck","Large dining room","Main-floor bedroom"],hoa:0,flood:0,tax:2.0,x:-1.6,y:0.9,eruv:1,c:["#9db4c8","#eef1f5"],desc:"Center-hall colonial with a dining room that seats 20, a separate Pesach kitchen and a guest suite on the main floor."},
+ {id:"b2",price:749000,beds:5,baths:3,sqft:2600,type:"Duplex",area:"Lakewood – Sunset",addr:"52 Birchwood Ln, Unit B",year:2021,days:5,f:["Finished basement","Sukkah deck","Large dining room"],hoa:0,flood:0,tax:2.0,x:-2.4,y:-0.6,eruv:1,c:["#b7c4a8","#f0f2ec"],desc:"Newer duplex half with a full finished basement, a sukkah deck off the kitchen and a short walk to several shuls."},
+ {id:"b3",price:459000,beds:3,baths:2,sqft:1450,type:"Condo",area:"Lakewood – Downtown",addr:"310 Main St #4C",year:2015,days:1,f:["Main-floor bedroom","Updated kitchen"],hoa:260,flood:0,tax:2.0,x:0.1,y:0.1,eruv:1,c:["#c2b2cf","#efedf3"],desc:"Elevator condo steps from Clifton Avenue shops, all on one level, with a deeded parking spot."},
+ {id:"b4",price:589000,beds:4,baths:2.5,sqft:1980,type:"Townhome",area:"Lakewood – Downtown",addr:"14 Hadassah Ct",year:2017,days:8,f:["Finished basement","Sukkah deck","Garage"],hoa:180,flood:0,tax:2.0,x:0.8,y:-0.5,eruv:1,c:["#d3b39a","#f5efe9"],desc:"End-unit townhome with a garage, finished basement playroom and a private sukkah deck."},
+ {id:"b5",price:875000,beds:5,baths:3,sqft:3100,type:"House",area:"Jackson",addr:"77 Whitesville Rd",year:2012,days:12,f:["Big yard","Finished basement","Garage","Home office"],hoa:0,flood:0,tax:2.2,x:-6.2,y:0.8,eruv:0,c:["#8fb39a","#edf3ee"],desc:"Colonial on a full acre with a two-car garage, home office and room to add an extension."},
+ {id:"b6",price:799000,beds:4,baths:2.5,sqft:2600,type:"House",area:"Jackson",addr:"9 Brookside Ct",year:2004,days:4,f:["Big yard","Updated kitchen","Main-floor bedroom"],hoa:0,flood:0,tax:2.2,x:-3.8,y:1.9,eruv:1,c:["#a7b8cc","#eff2f6"],desc:"Cul-de-sac home near the Lakewood border with a renovated kitchen and a bedroom suite on the main floor."},
+ {id:"b7",price:729000,beds:4,baths:2.5,sqft:2450,type:"House",area:"Howell",addr:"221 Aldrich Rd",year:1998,days:15,f:["Big yard","Garage","Home office"],hoa:0,flood:0,tax:2.1,x:-1.2,y:5.6,eruv:0,c:["#c9bf98","#f3f1e8"],desc:"Quiet street, three-quarter acre lot and a fenced backyard with a deck."},
+ {id:"b8",price:949000,beds:5,baths:3.5,sqft:3400,type:"House",area:"Howell",addr:"6 Kettle Creek Way",year:2025,days:3,f:["New build","Finished basement","Pesach kitchen","Garage","Large dining room"],hoa:0,flood:0,tax:2.1,x:0.4,y:4.2,eruv:1,c:["#b5c9c0","#eef4f1"],desc:"Brand-new construction with a second kitchen for Pesach, 9-foot basement and builder's warranty."},
+ {id:"b9",price:619000,beds:4,baths:2.5,sqft:2200,type:"House",area:"Toms River",addr:"41 Indian Hill Rd",year:1989,days:6,f:["Finished basement","Big yard","Garage"],hoa:0,flood:0,tax:1.8,x:-0.8,y:-4.6,eruv:1,c:["#a3b6d6","#eef1f6"],desc:"North Dover colonial with a finished basement and a large flat yard, close to the growing Toms River community."},
+ {id:"b10",price:689000,beds:3,baths:2,sqft:1700,type:"House",area:"Toms River",addr:"18 Bayview Dr",year:1972,days:20,f:["Waterfront","Updated kitchen","Garage"],hoa:0,flood:1800,tax:1.8,x:3.5,y:-8.5,eruv:0,c:["#86bfc6","#edf6f7"],desc:"Lagoon-front ranch with a bulkhead and dock, raised after Sandy, with an updated kitchen."},
+ {id:"b11",price:579000,beds:3,baths:2,sqft:1650,type:"House",area:"Brick",addr:"105 Herbertsville Rd",year:1965,days:9,f:["Big yard","Updated kitchen","Main-floor bedroom"],hoa:0,flood:0,tax:1.9,x:4.3,y:0.4,eruv:0,c:["#d0a8a0","#f6eeec"],desc:"Expanded ranch, everything on one floor, with a big yard and a new roof."},
+ {id:"b12",price:849000,beds:6,baths:4,sqft:3000,type:"Duplex",area:"Lakewood – Westgate",addr:"27 Massachusetts Ave, Unit A",year:2026,days:1,f:["New build","Finished basement","Pesach kitchen","Sukkah deck","Large dining room"],hoa:0,flood:0,tax:2.0,x:-1.9,y:1.4,eruv:1,c:["#a9b0d4","#efeff7"],desc:"New construction duplex with six bedrooms, a Pesach kitchen and a large sukkah deck. Ready this spring."},
 ];
 
-/* ---------- Jewish community places (sample, fictional names; x/y in miles) ---------- */
+/* ---------- Jewish community places (sample, fictional names) ---------- */
 const PLACES=[
- {n:"Congregation Ohr Hayam",t:"Synagogue",d:"Orthodox",x:1.1,y:1.0},
- {n:"Chabad of the Bay",t:"Synagogue",d:"Chabad",x:0.2,y:0.3},
- {n:"Congregation Shaarei Tikvah",t:"Synagogue",d:"Conservative",x:1.6,y:1.9},
- {n:"Temple Beth Shalom",t:"Synagogue",d:"Reform",x:2.3,y:3.2},
- {n:"Chabad of Santa Rosa",t:"Synagogue",d:"Chabad",x:10.3,y:9.2},
- {n:"Chabad of Gulf Breeze",t:"Synagogue",d:"Chabad",x:4.2,y:-5.1},
- {n:"Bay Kosher Market",t:"Kosher food",x:1.3,y:1.45},
- {n:"Palafox Kosher Grill",t:"Kosher food",x:0.3,y:0.05},
- {n:"Mikvah Mei Shalom",t:"Mikvah",x:0.85,y:1.3},
- {n:"Gulf Coast Torah Academy",t:"Jewish day school",x:2.0,y:2.4},
- {n:"Jewish Community Center",t:"JCC",x:2.7,y:3.0},
+ {n:"Bais Medrash Ohr Torah",t:"Synagogue",d:"Yeshivish",x:-1.5,y:1.0},
+ {n:"Khal Nachlas Yaakov",t:"Synagogue",d:"Chassidish",x:-1.9,y:1.2},
+ {n:"Bais Medrash Sunset",t:"Synagogue",d:"Yeshivish",x:-2.3,y:-0.4},
+ {n:"Congregation Ahavat Shalom",t:"Synagogue",d:"Sephardic",x:-0.5,y:0.3},
+ {n:"Downtown Bais Medrash",t:"Synagogue",d:"Yeshivish",x:0.2,y:0.0},
+ {n:"Chabad House Lakewood",t:"Synagogue",d:"Chabad",x:0.9,y:-0.3},
+ {n:"Khal Bnei Torah Jackson",t:"Synagogue",d:"Yeshivish",x:-3.7,y:1.7},
+ {n:"Chabad of West Jackson",t:"Synagogue",d:"Chabad",x:-6.5,y:0.5},
+ {n:"Bais Medrash of Howell",t:"Synagogue",d:"Yeshivish",x:0.6,y:4.0},
+ {n:"Young Israel of North Dover",t:"Synagogue",d:"Modern Orthodox",x:-0.6,y:-4.4},
+ {n:"Temple Beth Ami",t:"Synagogue",d:"Conservative",x:2.8,y:-7.2},
+ {n:"Chabad of Brick Shore",t:"Synagogue",d:"Chabad",x:4.6,y:0.6},
+ {n:"Clifton Ave Kosher Market",t:"Kosher food",x:0.0,y:0.2},
+ {n:"Westgate Kosher Grocery",t:"Kosher food",x:-1.7,y:0.7},
+ {n:"Sunset Pizza & Dairy",t:"Kosher food",x:-2.2,y:-0.8},
+ {n:"Jackson Kosher Mart",t:"Kosher food",x:-3.5,y:2.0},
+ {n:"Mikvah Westgate",t:"Mikvah",x:-1.3,y:1.3},
+ {n:"Mikvah Jackson",t:"Mikvah",x:-3.9,y:1.4},
+ {n:"Mikvah North Dover",t:"Mikvah",x:-0.9,y:-4.0},
+ {n:"Bais Yaakov of Westgate",t:"Yeshiva / school",x:-1.4,y:0.6},
+ {n:"Cheder Sunset",t:"Yeshiva / school",x:-2.6,y:-0.2},
+ {n:"Torah Academy of Howell",t:"Yeshiva / school",x:0.2,y:4.4},
 ];
-const POS={a1:[1.25,1.15,1],a2:[10.6,9.5],a3:[3.6,-5.4],a4:[0.05,0,1],a5:[2.7,3.6],a6:[22,-7],a7:[-14,-10],a8:[16,8],a9:[9.4,10.1],a10:[4.6,-4.7],a11:[1.5,1.0,1],a12:[0.6,0.8,1]};
-L.forEach(h=>{const p=POS[h.id];h.x=p[0];h.y=p[1];h.eruv=!!p[2];});
-const DENOMS=["Orthodox","Chabad","Conservative","Reform"];
-const COMMUNITY=["Kosher food","Mikvah","Jewish day school","JCC","Inside eruv"];
+const DENOMS=["Yeshivish","Chassidish","Sephardic","Chabad","Modern Orthodox","Conservative"];
+const COMMUNITY=["Kosher food","Mikvah","Yeshiva / school","Inside eruv"];
 const miles=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
 const walkMin=mi=>Math.max(1,Math.round(mi*1.25*20));   /* street factor 1.25, 20 min per mile */
 const driveMin=mi=>Math.max(2,Math.round(mi*1.3*2.2+2));
 const travel=mi=>walkMin(mi)<=30?walkMin(mi)+" min walk":driveMin(mi)+" min drive";
 function shulFor(h){const ds=S.prefs.denoms;let best=null;
   PLACES.filter(p=>p.t==="Synagogue"&&(!ds.length||ds.includes(p.d))).forEach(p=>{const m=miles(h,p);if(!best||m<best.mi)best={p,mi:m};});return best;}
-const hasCommunity=(h,c)=>c==="Inside eruv"?h.eruv:PLACES.some(p=>p.t===c&&miles(h,p)<=1.5);
+const hasCommunity=(h,c)=>c==="Inside eruv"?!!h.eruv:PLACES.some(p=>p.t===c&&miles(h,p)<=1.5);
 
 /* ---------- storage (best effort) ---------- */
-const KEY="gchf-v1";
-const defaults={fav:[],tours:[],notes:{},prefs:{budget:500000,beds:3,baths:2,areas:["East Hill","Gulf Breeze","Pace"],features:["Garage","Top schools"],timeline:"In 3–6 months",shulWalk:15,denoms:[],community:["Kosher food"]},calc:{price:450000,down:10,rate:6.25,term:30,tax:0.9,ins:3600,flood:0,hoa:0,income:110000,debts:450,mode:"pay"}};
+const KEY="lah-v1";
+const defaults={fav:[],tours:[],notes:{},prefs:{budget:850000,beds:4,baths:2.5,areas:["Lakewood – Westgate","Lakewood – Sunset","Jackson"],features:["Finished basement","Sukkah deck"],timeline:"In 3–6 months",shulWalk:10,denoms:[],community:["Kosher food","Inside eruv"]},calc:{price:750000,down:20,rate:6.25,term:30,tax:2.0,ins:1800,flood:0,hoa:0,income:180000,debts:600,mode:"pay"}};
 let S;
 try{ S=Object.assign(structuredClone(defaults),JSON.parse(localStorage.getItem(KEY)||"{}")); }catch(e){ S=structuredClone(defaults); }
 S.prefs=Object.assign(structuredClone(defaults.prefs),S.prefs);S.calc=Object.assign({},defaults.calc,S.calc);
@@ -369,7 +379,7 @@ function monthly(o){ // o: price, down(%), rate, term, tax(%), ins, flood, hoa
   const tax=o.price*o.tax/100/12, ins=o.ins/12, flood=o.flood/12, pmi=o.down<20?loan*0.005/12:0;
   return {pi,tax,ins,flood,hoa:o.hoa,pmi,total:pi+tax+ins+flood+o.hoa+pmi,loan,interest:pi*n-loan};
 }
-function listingPay(h){ return monthly({...S.calc,price:h.price,hoa:h.hoa,flood:h.flood,ins:Math.max(2400,h.price*0.0085)}).total; }
+function listingPay(h){ return monthly({...S.calc,price:h.price,hoa:h.hoa,flood:h.flood,ins:Math.max(1300,h.price*0.0022),tax:h.tax}).total; }
 
 function score(h){
   const p=S.prefs; let s=0; const why=[];
@@ -387,10 +397,10 @@ function score(h){
 
 /* house illustration (no external images) */
 function art(h,big){
-  const [a,b]=h.c, roofs={House:"M40 86 L120 36 L200 86Z",Condo:"M60 40h120v8H60z",Townhome:"M44 70 L84 44 L124 70 L164 44 L204 70Z"};
-  const body = h.type==="Condo"
+  const T=h.type==="Duplex"?"Townhome":h.type, [a,b]=h.c, roofs={House:"M40 86 L120 36 L200 86Z",Condo:"M60 40h120v8H60z",Townhome:"M44 70 L84 44 L124 70 L164 44 L204 70Z"};
+  const body = T==="Condo"
     ? `<rect x="60" y="48" width="120" height="96" fill="${b}"/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<rect x="${72+c*36}" y="${56+r*21}" width="22" height="13" rx="2" fill="${a}" opacity=".8"/>`).join("")).join("")}`
-    : h.type==="Townhome"
+    : T==="Townhome"
     ? `<rect x="48" y="70" width="152" height="74" fill="${b}"/><rect x="72" y="104" width="18" height="40" fill="${a}"/><rect x="152" y="104" width="18" height="40" fill="${a}"/><rect x="100" y="84" width="40" height="18" rx="2" fill="${a}" opacity=".7"/>`
     : `<rect x="54" y="84" width="132" height="60" fill="${b}"/><rect x="110" y="104" width="22" height="40" fill="${a}"/><rect x="68" y="98" width="28" height="20" rx="2" fill="${a}" opacity=".7"/><rect x="146" y="98" width="28" height="20" rx="2" fill="${a}" opacity=".7"/>`;
   const water=h.f.includes("Waterfront")||h.f.includes("Near beach");
@@ -399,7 +409,7 @@ function art(h,big){
    <rect width="240" height="150" fill="url(#sky${h.id}${big?'b':''})"/>
    <circle cx="198" cy="30" r="13" fill="#f6c46a" opacity=".9"/>
    ${water?`<rect y="128" width="240" height="22" fill="#3d8fa3"/><path d="M0 133q15-4 30 0t30 0 30 0 30 0 30 0 30 0 30 0 30 0" stroke="#bfe3ea" stroke-width="2" fill="none"/>`:`<rect y="138" width="240" height="12" fill="#7ea36b"/>`}
-   <path d="${roofs[h.type]}" fill="#2d3f47" opacity=".85"/>${body}
+   <path d="${roofs[T]}" fill="#2d3f47" opacity=".85"/>${body}
    <circle cx="26" cy="120" r="14" fill="#5f8a55"/><rect x="24" y="120" width="4" height="22" fill="#5b4632"/>
    ${h.f.includes("Pool")?`<rect x="190" y="128" width="40" height="10" rx="5" fill="#6fd0e0"/>`:""}
   </svg>`;
@@ -416,9 +426,9 @@ function filtered(){
 const STAR=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20.5 17.5h-17zM12 21 3.5 6.5h17z"/></svg>`;
 function shulLine(h){const sh=shulFor(h);if(!sh)return"";
   return `<div class="shul">${STAR}<span><b class="num">${travel(sh.mi)}</b> to ${sh.p.n} <span class="dim">(${sh.p.d})</span>${h.eruv?` <span class="dim">· in eruv</span>`:""}</span></div>`;}
-const PCOL={Synagogue:"var(--brand)","Kosher food":"var(--warn)",Mikvah:"#6f80c9","Jewish day school":"#a678c2",JCC:"#c4675a"};
+const PCOL={Synagogue:"var(--brand)","Kosher food":"var(--warn)",Mikvah:"#6f80c9","Yeshiva / school":"#a678c2"};
 function communityBox(h){
-  const near=PLACES.map(p=>({...p,mi:miles(h,p)})).sort((a,b)=>a.mi-b.mi), within=near.filter(p=>p.mi<=1.5);
+  const near=PLACES.map(p=>({...p,mi:miles(h,p)})).sort((a,b)=>a.mi-b.mi), within=near.filter(p=>p.mi<=1.5).slice(0,8);
   const cx=130,cy=95,sc=56; /* 56px per mile, 1.5 mi radius */
   const map=`<svg class="mini" viewBox="0 0 260 190" role="img" aria-label="Map of Jewish community places within 1.5 miles of this home">
     ${[[0.4,"10 min"],[0.8,"20 min"],[1.2,"30 min walk"]].map(([m,t])=>`<circle cx="${cx}" cy="${cy}" r="${m*sc}" class="ring"/><text x="${cx}" y="${cy-m*sc-3}" class="rl">${t}</text>`).join("")}
@@ -453,7 +463,7 @@ function renderSearch(){
 /* ---------- detail ---------- */
 function openHome(id){
   const h=L.find(x=>x.id===id); if(!h) return;
-  const m=monthly({...S.calc,price:h.price,hoa:h.hoa,flood:h.flood,ins:Math.max(2400,h.price*0.0085)});
+  const m=monthly({...S.calc,price:h.price,hoa:h.hoa,flood:h.flood,ins:Math.max(1300,h.price*0.0022),tax:h.tax});
   const sc=score(h), fav=S.fav.includes(h.id);
   $("#dBody").innerHTML=`
    <div class="ph">${art(h,true)}</div>
@@ -488,7 +498,7 @@ function openHome(id){
   $("#tourForm").addEventListener("submit",e=>{e.preventDefault();S.tours.unshift({id:h.id,date:$("#tDate").value,time:$("#tTime").value,note:$("#tNote").value,at:Date.now()});save();toast("Showing request saved for "+h.addr);});
   $("#dNote").addEventListener("input",e=>{S.notes[h.id]=e.target.value;save();});
   $("#dFav").addEventListener("click",()=>{toggleFav(h.id);openHome(h.id);});
-  $("#dCalc").addEventListener("click",()=>{S.calc.price=h.price;S.calc.hoa=h.hoa;S.calc.flood=h.flood;S.calc.mode="pay";save();closeHome();});
+  $("#dCalc").addEventListener("click",()=>{S.calc.price=h.price;S.calc.tax=h.tax;S.calc.hoa=h.hoa;S.calc.flood=h.flood;S.calc.mode="pay";save();closeHome();});
   $("#sheet").hidden=false;document.body.style.overflow="hidden";$("#dClose").focus();
 }
 function closeHome(){$("#sheet").hidden=true;document.body.style.overflow="";}
