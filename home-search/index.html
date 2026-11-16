@@ -1,0 +1,533 @@
+<title>Gulf Coast Home Finder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: app shell — sticky top bar with tabs, one view at a time; listing grid + detail sheet; calculator as two-pane worksheet */
+:root{
+  --bg:#f3f6f7;          /* salt-air grey, faint teal bias */
+  --surface:#ffffff;
+  --ink:#10242e;          /* deep gulf navy */
+  --ink-2:#4a5f68;
+  --line:#d8e1e4;
+  --brand:#0b6e74;        /* bay teal */
+  --brand-ink:#ffffff;
+  --brand-soft:#dcefee;
+  --sun:#f2a541;          /* sunset gold accent */
+  --sun-soft:#fdf0dc;
+  --good:#2e7d4f; --warn:#b26a00;
+  --chip:#eaf0f2;
+  --shadow:0 1px 2px rgba(16,36,46,.06),0 6px 20px rgba(16,36,46,.07);
+  --f-display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c171c;--surface:#13232a;--ink:#e6eff2;--ink-2:#9db2ba;--line:#24383f;
+  --brand:#3fb7b8;--brand-ink:#04262a;--brand-soft:#173a3d;--sun:#f5b65e;--sun-soft:#3a2c17;
+  --good:#5cc98a;--warn:#f0b04a;--chip:#1b2f36;--shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c171c;--surface:#13232a;--ink:#e6eff2;--ink-2:#9db2ba;--line:#24383f;
+  --brand:#3fb7b8;--brand-ink:#04262a;--brand-soft:#173a3d;--sun:#f5b65e;--sun-soft:#3a2c17;
+  --good:#5cc98a;--warn:#f0b04a;--chip:#1b2f36;--shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto}
+.brand svg{width:34px;height:34px;flex:none}
+.brand b{font-family:var(--f-display);font-size:18px;display:block;line-height:1.1}
+.brand small{color:var(--ink-2);font-size:12px}
+.tabs{display:flex;gap:4px;overflow-x:auto;max-width:100%}
+.tabs a{padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--ink-2);font-weight:600;font-size:14px;white-space:nowrap}
+.tabs a[aria-current="page"]{background:var(--brand-soft);color:var(--brand)}
+.tabs a .count{background:var(--sun);color:#3a2300;border-radius:999px;font-size:11px;padding:1px 6px;margin-left:4px}
+
+main{padding-block:24px 64px}
+.view[hidden]{display:none}
+.lede{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.lede h1{font-size:clamp(24px,3.2vw,34px)}
+.lede p{color:var(--ink-2);margin:4px 0 0;max-width:62ch}
+.sample{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--sun-soft);color:var(--warn);padding:3px 8px;border-radius:6px}
+
+/* filters */
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;margin-bottom:18px}
+.filters label,.field label{display:block;font-size:12px;font-weight:700;color:var(--ink-2);letter-spacing:.03em;text-transform:uppercase;margin-bottom:4px}
+select,input[type=number],input[type=text],input[type=email],input[type=tel],input[type=date],textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+textarea{resize:vertical;min-height:70px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s}
+.card:hover{transform:translateY(-2px)}
+.ph{position:relative;aspect-ratio:16/10;max-width:100%;overflow:hidden}
+.ph svg{width:100%;height:100%;display:block}
+.badge{position:absolute;left:10px;top:10px;background:var(--surface);color:var(--ink);font-size:12px;font-weight:700;padding:4px 8px;border-radius:999px;box-shadow:var(--shadow)}
+.heart{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;border:0;background:var(--surface);display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow)}
+.heart svg{width:18px;height:18px;fill:none;stroke:var(--ink);stroke-width:2}
+.heart[aria-pressed="true"] svg{fill:#e0565b;stroke:#e0565b}
+.cbody{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.price{font-family:var(--f-display);font-size:22px;font-weight:700}
+.specs{color:var(--ink-2);font-size:14px}
+.addr{font-size:14px}
+.est{font-size:13px;color:var(--brand);font-weight:600}
+.match{display:flex;align-items:center;gap:8px;margin-top:auto;padding-top:8px;border-top:1px dashed var(--line);font-size:13px;color:var(--ink-2)}
+.meter{flex:none;width:44px;height:6px;border-radius:9px;background:var(--chip);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--brand)}
+.match b{color:var(--ink)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:var(--r);padding:32px;text-align:center;color:var(--ink-2)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 16px;border-radius:10px;border:1px solid transparent;font-weight:700;cursor:pointer;text-decoration:none}
+.btn-p{background:var(--brand);color:var(--brand-ink)}
+.btn-s{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-sun{background:var(--sun);color:#3a2300}
+
+/* detail sheet */
+.sheet{position:fixed;inset:0;z-index:40;display:flex;justify-content:flex-end;background:rgba(6,18,24,.45)}
+.sheet[hidden]{display:none}
+.panel{background:var(--surface);width:min(620px,100%);height:100%;overflow-y:auto;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+.panel .ph{aspect-ratio:16/9}
+.pbody{padding:18px max(18px,env(safe-area-inset-right,0px)) 0 18px;display:flex;flex-direction:column;gap:16px}
+.close{position:absolute;right:calc(12px + env(safe-area-inset-right,0px));top:calc(12px + env(safe-area-inset-top,0px));width:40px;height:40px;border-radius:50%;border:0;background:var(--surface);font-size:22px;cursor:pointer;box-shadow:var(--shadow);z-index:2}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.facts div{background:var(--chip);border-radius:10px;padding:8px 10px}
+.facts b{display:block;font-size:17px;font-family:var(--f-display)}
+.facts span{font-size:12px;color:var(--ink-2)}
+@media (max-width:480px){.facts{grid-template-columns:repeat(2,1fr)}}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{background:var(--chip);border-radius:999px;padding:4px 10px;font-size:13px}
+.chip.on{background:var(--brand-soft);color:var(--brand);font-weight:700}
+.box{border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.box h3{font-size:17px;margin-bottom:8px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:14px}
+.row span:first-child{color:var(--ink-2)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:600;z-index:60}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:820px){.calc{grid-template-columns:1fr}}
+.pane{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.pane h2{font-size:20px;margin-bottom:12px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fields .full{grid-column:1/-1}
+input[type=range]{width:100%;accent-color:var(--brand)}
+.big{font-family:var(--f-display);font-size:44px;font-weight:800;line-height:1}
+.big small{font-size:16px;font-weight:600;color:var(--ink-2)}
+.stack{display:flex;height:16px;border-radius:9px;overflow:hidden;margin:14px 0 10px;background:var(--chip)}
+.legend{display:grid;gap:4px}
+.legend .row i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.note{font-size:12.5px;color:var(--ink-2)}
+.seg{display:inline-flex;background:var(--chip);border-radius:10px;padding:3px;gap:3px}
+.seg button{border:0;background:transparent;padding:6px 12px;border-radius:8px;font-weight:700;cursor:pointer;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+
+/* preferences */
+.prefs{display:grid;gap:18px;max-width:820px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;cursor:pointer;font-weight:600}
+.opt[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+
+/* saved */
+.tour{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.tour .when{font-weight:700}
+.tour .st{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--sun-soft);color:var(--warn)}
+
+/* agent card */
+.agent{display:flex;gap:14px;align-items:center;background:var(--brand);color:var(--brand-ink);border-radius:var(--r);padding:16px;flex-wrap:wrap}
+.agent .av{width:52px;height:52px;border-radius:50%;background:var(--sun);color:#3a2300;display:grid;place-items:center;font-family:var(--f-display);font-weight:800;font-size:20px;flex:none}
+.agent div{min-width:0}
+.agent b{font-family:var(--f-display);font-size:18px;display:block}
+.agent .contact{user-select:all}
+footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px solid var(--line)}
+</style>
+
+<header class="top gutter">
+  <div class="wrap">
+    <a class="brand" href="#search">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="var(--brand)"/><path d="M9 21 20 11l11 10v9a1 1 0 0 1-1 1h-6v-7h-8v7h-6a1 1 0 0 1-1-1z" fill="var(--brand-ink)"/><circle cx="29" cy="12" r="3.2" fill="var(--sun)"/></svg>
+      <span><b id="brandName">Gulf Coast Home Finder</b><small id="brandSub">with your agent</small></span>
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#search">Homes</a>
+      <a href="#my-style">My wish list</a>
+      <a href="#mortgage">Mortgage</a>
+      <a href="#saved">Saved &amp; tours<span class="count num" id="savedCount" hidden></span></a>
+    </nav>
+  </div>
+</header>
+
+<main class="gutter"><div class="wrap">
+
+  <!-- SEARCH -->
+  <section class="view" id="v-search">
+    <div class="lede">
+      <div>
+        <h1 id="searchTitle">Homes picked for you</h1>
+        <p id="searchSub">Sorted by how well each home fits your wish list. Monthly estimates include Florida taxes and insurance.</p>
+      </div>
+      <span class="sample">Sample listings</span>
+    </div>
+    <div class="filters">
+      <div><label for="fArea">Area</label><select id="fArea"><option value="">All areas</option></select></div>
+      <div><label for="fMax">Max price</label><select id="fMax"><option value="">Any</option><option>300000</option><option>400000</option><option>500000</option><option>650000</option><option>800000</option><option>1000000</option></select></div>
+      <div><label for="fBeds">Beds</label><select id="fBeds"><option value="0">Any</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+      <div><label for="fType">Type</label><select id="fType"><option value="">Any</option><option>House</option><option>Condo</option><option>Townhome</option></select></div>
+      <div><label for="fSort">Sort</label><select id="fSort"><option value="match">Best match</option><option value="new">Newest</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="pay">Monthly payment</option></select></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <!-- PREFERENCES -->
+  <section class="view" id="v-my-style" hidden>
+    <div class="lede"><div><h1>Your wish list</h1><p>Tell us what matters and every listing gets a match score. Your agent sees this too and can send homes that fit before they hit the big sites.</p></div></div>
+    <div class="prefs">
+      <div class="pane">
+        <h2>Budget &amp; size</h2>
+        <div class="fields">
+          <div class="field full"><label for="pBudget">Comfortable price: <span id="pBudgetOut" class="num"></span></label><input type="range" id="pBudget" min="200000" max="1200000" step="10000"></div>
+          <div class="field"><label for="pBeds">Bedrooms (min)</label><select id="pBeds"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
+          <div class="field"><label for="pBaths">Bathrooms (min)</label><select id="pBaths"><option>1</option><option>1.5</option><option>2</option><option>2.5</option><option>3</option></select></div>
+        </div>
+      </div>
+      <div class="pane"><h2>Where you'd like to live</h2><div class="opts" id="pAreas"></div></div>
+      <div class="pane"><h2>Must-haves</h2><div class="opts" id="pFeatures"></div></div>
+      <div class="pane"><h2>Your timeline</h2><div class="opts" id="pTimeline"></div></div>
+      <div><a class="btn btn-p" href="#search">See my matches</a></div>
+    </div>
+  </section>
+
+  <!-- MORTGAGE -->
+  <section class="view" id="v-mortgage" hidden>
+    <div class="lede"><div><h1>What will it really cost?</h1><p>The full monthly picture, including the costs the big sites tend to lowball in Florida: homeowner's insurance, flood insurance and HOA.</p></div>
+      <div class="seg" role="group" aria-label="Calculator mode"><button type="button" id="mPay" aria-pressed="true">Monthly payment</button><button type="button" id="mAfford" aria-pressed="false">What can I afford?</button></div>
+    </div>
+    <div class="calc">
+      <div class="pane">
+        <h2 id="calcInHead">The home</h2>
+        <div class="fields">
+          <div class="field full" id="wrapPrice"><label for="cPrice">Home price</label><input type="number" id="cPrice" class="num" step="5000" min="0"></div>
+          <div class="field full" id="wrapIncome" hidden><label for="cIncome">Household income (yearly, before tax)</label><input type="number" id="cIncome" class="num" step="1000" min="0"></div>
+          <div class="field full" id="wrapDebts" hidden><label for="cDebts">Monthly debt payments (car, cards, student loans)</label><input type="number" id="cDebts" class="num" step="50" min="0"></div>
+          <div class="field full"><label for="cDown">Down payment: <span id="cDownOut" class="num"></span></label><input type="range" id="cDown" min="0" max="50" step="0.5"></div>
+          <div class="field"><label for="cRate">Interest rate %</label><input type="number" id="cRate" class="num" step="0.125" min="0"></div>
+          <div class="field"><label for="cTerm">Loan term</label><select id="cTerm"><option value="30">30 years</option><option value="20">20 years</option><option value="15">15 years</option></select></div>
+          <div class="field"><label for="cTax">Property tax % / yr</label><input type="number" id="cTax" class="num" step="0.05" min="0"></div>
+          <div class="field"><label for="cIns">Home insurance $ / yr</label><input type="number" id="cIns" class="num" step="100" min="0"></div>
+          <div class="field"><label for="cFlood">Flood insurance $ / yr</label><input type="number" id="cFlood" class="num" step="100" min="0"></div>
+          <div class="field"><label for="cHoa">HOA $ / month</label><input type="number" id="cHoa" class="num" step="10" min="0"></div>
+        </div>
+        <p class="note" style="margin-top:12px">Example rate only. Ask your agent for a lender referral to get a real quote. PMI is added at 0.5%/yr of the loan when the down payment is under 20%.</p>
+      </div>
+      <div class="pane" aria-live="polite">
+        <h2 id="calcOutHead">Estimated monthly payment</h2>
+        <div class="big num" id="cBig"></div>
+        <div class="stack" id="cStack"></div>
+        <div class="legend" id="cLegend"></div>
+        <div class="box" style="margin-top:14px">
+          <div class="row"><span>Loan amount</span><b class="num" id="oLoan"></b></div>
+          <div class="row"><span>Cash for down payment</span><b class="num" id="oDown"></b></div>
+          <div class="row"><span>Closing costs (about 3%)</span><b class="num" id="oClose"></b></div>
+          <div class="row"><span>Total interest over the loan</span><b class="num" id="oInt"></b></div>
+          <div class="row" id="rowRatio" hidden><span>Housing cost as % of income</span><b class="num" id="oRatio"></b></div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+          <button class="btn btn-p" type="button" id="cShow">Show homes in this budget</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAVED -->
+  <section class="view" id="v-saved" hidden>
+    <div class="lede"><div><h1>Saved homes &amp; tours</h1><p>Your favorites and showing requests. Add a private note to any home to remember what you liked.</p></div></div>
+    <h2 style="font-size:18px;margin:6px 0 10px">Showing requests</h2>
+    <div id="tours" style="display:grid;gap:10px;margin-bottom:26px"></div>
+    <h2 style="font-size:18px;margin:6px 0 10px">Favorites</h2>
+    <div class="grid" id="savedGrid"></div>
+  </section>
+
+  <div class="agent" style="margin-top:32px">
+    <div class="av" id="agentInit">JA</div>
+    <div style="flex:1">
+      <b id="agentName">Jordan Avery, REALTOR®</b>
+      <span id="agentBrok">Your Brokerage Name · Pensacola, FL</span><br>
+      <span class="contact num" id="agentPhone">(850) 555-0142</span> · <span class="contact" id="agentEmail">agent@example.com</span>
+    </div>
+    <button class="btn btn-sun" type="button" id="copyPhone">Copy phone number</button>
+  </div>
+
+</div></main>
+
+<footer class="gutter"><div class="wrap">
+  Prototype with sample listings, photos and agent details. A live version pulls real listings through the agent's MLS (IDX feed). Estimates are for planning only and are not a loan offer.
+</div></footer>
+
+<!-- Listing detail -->
+<div class="sheet" id="sheet" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="dTitle" style="position:relative">
+    <button class="close" id="dClose" aria-label="Close">×</button>
+    <div id="dBody"></div>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ---------- config: change these for the real agent ---------- */
+const AGENT = { name:"Jordan Avery", title:"REALTOR®", brokerage:"Your Brokerage Name", market:"Pensacola, FL", phone:"(850) 555-0142", email:"agent@example.com" };
+
+/* ---------- sample data (fictional) ---------- */
+const AREAS = ["East Hill","Downtown","Cordova Park","Gulf Breeze","Pace","Navarre","Perdido Key","Milton"];
+const FEATURES = ["Pool","Garage","Waterfront","Big yard","New build","Updated kitchen","Home office","Near beach","Top schools","Single story"];
+const L = [
+ {id:"a1",price:489000,beds:3,baths:2,sqft:1840,type:"House",area:"East Hill",addr:"1418 N 12th Ave",year:1948,days:2,f:["Updated kitchen","Big yard","Home office"],hoa:0,flood:0,c:["#7fa9b8","#f3e6cf"],desc:"Classic East Hill bungalow with a deep front porch, original heart-pine floors and a fenced yard with room for a pool."},
+ {id:"a2",price:365000,beds:3,baths:2,sqft:1620,type:"House",area:"Pace",addr:"4862 Ridgeline Ct",year:2021,days:5,f:["New build","Garage","Single story","Top schools"],hoa:45,flood:0,c:["#9bb7a2","#eceae4"],desc:"Nearly-new single story in a quiet cul-de-sac, zoned for top-rated Santa Rosa County schools."},
+ {id:"a3",price:829000,beds:4,baths:3,sqft:2610,type:"House",area:"Gulf Breeze",addr:"203 Sabine Dr",year:1994,days:9,f:["Pool","Waterfront","Garage","Top schools"],hoa:0,flood:1900,c:["#e6b98a","#f6efe3"],desc:"Sound-front home with a private dock, screened saltwater pool and sunset views across Santa Rosa Sound."},
+ {id:"a4",price:299000,beds:2,baths:2,sqft:1110,type:"Condo",area:"Downtown",addr:"220 S Palafox Pl #504",year:2008,days:1,f:["Updated kitchen","Single story"],hoa:410,flood:0,c:["#b7a8c9","#ecebf2"],desc:"Fifth-floor condo a block off Palafox with a balcony over the bay, gated parking and a rooftop pool."},
+ {id:"a5",price:549000,beds:4,baths:2.5,sqft:2280,type:"House",area:"Cordova Park",addr:"3106 Pinewood Ln",year:1972,days:14,f:["Pool","Big yard","Top schools","Garage"],hoa:0,flood:0,c:["#8fb0d1","#eef1f4"],desc:"Mid-century ranch on a third of an acre with a refinished pool and a brand-new roof (2025)."},
+ {id:"a6",price:439000,beds:3,baths:2.5,sqft:1760,type:"Townhome",area:"Navarre",addr:"7520 Gulf Blvd #3",year:2016,days:6,f:["Near beach","Garage","Pool"],hoa:325,flood:1400,c:["#f0c6a1","#f8f2ea"],desc:"Three-story townhome steps from Navarre Beach with a community pool and a rooftop deck."},
+ {id:"a7",price:689000,beds:3,baths:3,sqft:1950,type:"Condo",area:"Perdido Key",addr:"13753 Perdido Key Dr #1102",year:2005,days:21,f:["Waterfront","Near beach","Pool"],hoa:780,flood:0,c:["#86c1c0","#eef6f5"],desc:"Gulf-front corner unit with wraparound balcony, two pools and direct beach access."},
+ {id:"a8",price:275000,beds:3,baths:2,sqft:1380,type:"House",area:"Milton",addr:"6011 Sycamore St",year:1998,days:3,f:["Big yard","Single story","Garage"],hoa:0,flood:0,c:["#c4b28c","#f2efe6"],desc:"Move-in ready brick home on a half acre with a workshop and room for an RV."},
+ {id:"a9",price:415000,beds:4,baths:3,sqft:2140,type:"House",area:"Pace",addr:"3390 Wildflower Way",year:2023,days:4,f:["New build","Garage","Home office","Top schools"],hoa:60,flood:0,c:["#a6c3b4","#eff3f0"],desc:"Builder's-warranty home with a flex room set up as an office and a covered back patio."},
+ {id:"a10",price:975000,beds:5,baths:4,sqft:3420,type:"House",area:"Gulf Breeze",addr:"16 Shoreline Cir",year:2012,days:11,f:["Pool","Waterfront","Garage","Updated kitchen","Top schools"],hoa:85,flood:2300,c:["#d9a27a","#f7efe7"],desc:"Bay-front home with chef's kitchen, summer kitchen by the pool, and a boat lift."},
+ {id:"a11",price:519000,beds:3,baths:2,sqft:1690,type:"House",area:"East Hill",addr:"910 E Jordan St",year:2019,days:7,f:["New build","Updated kitchen","Home office"],hoa:0,flood:0,c:["#93a7c4","#eef0f5"],desc:"Modern farmhouse infill build, walk to Bayview Park and the Saturday market."},
+ {id:"a12",price:349000,beds:2,baths:2.5,sqft:1420,type:"Townhome",area:"Downtown",addr:"611 N Barcelona St",year:2014,days:10,f:["Garage","Updated kitchen"],hoa:150,flood:0,c:["#c9a0a0","#f5eeee"],desc:"Brick townhome in North Hill with garage parking and a private courtyard."},
+];
+
+/* ---------- storage (best effort) ---------- */
+const KEY="gchf-v1";
+const defaults={fav:[],tours:[],notes:{},prefs:{budget:500000,beds:3,baths:2,areas:["East Hill","Gulf Breeze","Pace"],features:["Garage","Top schools"],timeline:"In 3–6 months"},calc:{price:450000,down:10,rate:6.25,term:30,tax:0.9,ins:3600,flood:0,hoa:0,income:110000,debts:450,mode:"pay"}};
+let S;
+try{ S=Object.assign(structuredClone(defaults),JSON.parse(localStorage.getItem(KEY)||"{}")); }catch(e){ S=structuredClone(defaults); }
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} updateCount(); }
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const money=n=>"$"+Math.round(n).toLocaleString("en-US");
+const short=n=>n>=1e6?"$"+(n/1e6).toFixed(n%1e6?2:0)+"M":"$"+Math.round(n/1000)+"K";
+function toast(t){const el=$("#toast");el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2200);}
+
+function monthly(o){ // o: price, down(%), rate, term, tax(%), ins, flood, hoa
+  const loan=o.price*(1-o.down/100), r=o.rate/100/12, n=o.term*12;
+  const pi=r?loan*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):loan/n;
+  const tax=o.price*o.tax/100/12, ins=o.ins/12, flood=o.flood/12, pmi=o.down<20?loan*0.005/12:0;
+  return {pi,tax,ins,flood,hoa:o.hoa,pmi,total:pi+tax+ins+flood+o.hoa+pmi,loan,interest:pi*n-loan};
+}
+function listingPay(h){ return monthly({...S.calc,price:h.price,hoa:h.hoa,flood:h.flood,ins:Math.max(2400,h.price*0.0085)}).total; }
+
+function score(h){
+  const p=S.prefs; let s=0; const why=[];
+  if(h.price<=p.budget){s+=30;why.push("In budget");} else if(h.price<=p.budget*1.1){s+=15;why.push("Just over budget");}
+  if(h.beds>=p.beds){s+=15;} if(h.baths>=p.baths){s+=10;}
+  if(!p.areas.length||p.areas.includes(h.area)){s+=15; if(p.areas.length) why.push(h.area);}
+  const want=p.features, has=want.filter(f=>h.f.includes(f));
+  s+= want.length?30*has.length/want.length:30;
+  has.slice(0,2).forEach(f=>why.push(f));
+  return {pct:Math.round(s),why};
+}
+
+/* house illustration (no external images) */
+function art(h,big){
+  const [a,b]=h.c, roofs={House:"M40 86 L120 36 L200 86Z",Condo:"M60 40h120v8H60z",Townhome:"M44 70 L84 44 L124 70 L164 44 L204 70Z"};
+  const body = h.type==="Condo"
+    ? `<rect x="60" y="48" width="120" height="96" fill="${b}"/>${[0,1,2,3].map(r=>[0,1,2].map(c=>`<rect x="${72+c*36}" y="${56+r*21}" width="22" height="13" rx="2" fill="${a}" opacity=".8"/>`).join("")).join("")}`
+    : h.type==="Townhome"
+    ? `<rect x="48" y="70" width="152" height="74" fill="${b}"/><rect x="72" y="104" width="18" height="40" fill="${a}"/><rect x="152" y="104" width="18" height="40" fill="${a}"/><rect x="100" y="84" width="40" height="18" rx="2" fill="${a}" opacity=".7"/>`
+    : `<rect x="54" y="84" width="132" height="60" fill="${b}"/><rect x="110" y="104" width="22" height="40" fill="${a}"/><rect x="68" y="98" width="28" height="20" rx="2" fill="${a}" opacity=".7"/><rect x="146" y="98" width="28" height="20" rx="2" fill="${a}" opacity=".7"/>`;
+  const water=h.f.includes("Waterfront")||h.f.includes("Near beach");
+  return `<svg viewBox="0 0 240 150" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Illustration of ${h.type.toLowerCase()} at ${h.addr}">
+   <defs><linearGradient id="sky${h.id}${big?'b':''}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs>
+   <rect width="240" height="150" fill="url(#sky${h.id}${big?'b':''})"/>
+   <circle cx="198" cy="30" r="13" fill="#f6c46a" opacity=".9"/>
+   ${water?`<rect y="128" width="240" height="22" fill="#3d8fa3"/><path d="M0 133q15-4 30 0t30 0 30 0 30 0 30 0 30 0 30 0 30 0" stroke="#bfe3ea" stroke-width="2" fill="none"/>`:`<rect y="138" width="240" height="12" fill="#7ea36b"/>`}
+   <path d="${roofs[h.type]}" fill="#2d3f47" opacity=".85"/>${body}
+   <circle cx="26" cy="120" r="14" fill="#5f8a55"/><rect x="24" y="120" width="4" height="22" fill="#5b4632"/>
+   ${h.f.includes("Pool")?`<rect x="190" y="128" width="40" height="10" rx="5" fill="#6fd0e0"/>`:""}
+  </svg>`;
+}
+
+/* ---------- search view ---------- */
+function filtered(){
+  const area=$("#fArea").value,max=+$("#fMax").value||Infinity,beds=+$("#fBeds").value,type=$("#fType").value,sort=$("#fSort").value;
+  let r=L.filter(h=>(!area||h.area===area)&&h.price<=max&&h.beds>=beds&&(!type||h.type===type));
+  const by={match:(x,y)=>score(y).pct-score(x).pct,new:(x,y)=>x.days-y.days,low:(x,y)=>x.price-y.price,high:(x,y)=>y.price-x.price,pay:(x,y)=>listingPay(x)-listingPay(y)}[sort];
+  return r.sort(by);
+}
+function card(h){
+  const m=score(h), fav=S.fav.includes(h.id);
+  return `<article class="card" data-id="${h.id}" tabindex="0" aria-label="${h.addr}, ${money(h.price)}">
+    <div class="ph">${art(h)}<span class="badge">${h.days<=3?"New · "+h.days+"d":h.area}</span>
+      <button class="heart" data-fav="${h.id}" aria-pressed="${fav}" aria-label="${fav?"Remove from":"Save to"} favorites"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
+    <div class="cbody">
+      <div class="price num">${money(h.price)}</div>
+      <div class="specs num">${h.beds} bd · ${h.baths} ba · ${h.sqft.toLocaleString()} sq ft · ${h.type}</div>
+      <div class="addr">${h.addr}, ${h.area}</div>
+      <div class="est num">About ${money(listingPay(h))}/mo all-in</div>
+      <div class="match"><span class="meter"><i style="width:${m.pct}%"></i></span><b class="num">${m.pct}% match</b><span>${m.why.slice(0,2).join(" · ")}</span></div>
+    </div></article>`;
+}
+function renderSearch(){
+  const r=filtered(), g=$("#grid");
+  g.innerHTML=r.length?r.map(card).join(""):`<div class="empty">No homes match these filters. Try a wider price range or another area.</div>`;
+}
+
+/* ---------- detail ---------- */
+function openHome(id){
+  const h=L.find(x=>x.id===id); if(!h) return;
+  const m=monthly({...S.calc,price:h.price,hoa:h.hoa,flood:h.flood,ins:Math.max(2400,h.price*0.0085)});
+  const sc=score(h), fav=S.fav.includes(h.id);
+  $("#dBody").innerHTML=`
+   <div class="ph">${art(h,true)}</div>
+   <div class="pbody">
+     <div><div class="price num" style="font-size:30px">${money(h.price)}</div><h2 id="dTitle" style="font-size:19px">${h.addr}, ${h.area}</h2>
+       <div class="specs">Listed ${h.days} day${h.days>1?"s":""} ago · Built ${h.year}</div></div>
+     <div class="facts num"><div><b>${h.beds}</b><span>Beds</span></div><div><b>${h.baths}</b><span>Baths</span></div><div><b>${h.sqft.toLocaleString()}</b><span>Sq ft</span></div><div><b>${money(h.price/h.sqft)}</b><span>Per sq ft</span></div></div>
+     <p style="margin:0">${h.desc}</p>
+     <div class="chips">${h.f.map(f=>`<span class="chip ${S.prefs.features.includes(f)?"on":""}">${f}</span>`).join("")}</div>
+     <div class="box"><h3>${sc.pct}% match with your wish list</h3><div class="note">${sc.why.join(" · ")||"Update your wish list to see why."}</div></div>
+     <div class="box"><h3>Monthly cost, all-in: <span class="num">${money(m.total)}</span></h3>
+       <div class="row"><span>Principal &amp; interest</span><span class="num">${money(m.pi)}</span></div>
+       <div class="row"><span>Property tax</span><span class="num">${money(m.tax)}</span></div>
+       <div class="row"><span>Home insurance (est.)</span><span class="num">${money(m.ins)}</span></div>
+       ${m.flood?`<div class="row"><span>Flood insurance (flood zone)</span><span class="num">${money(m.flood)}</span></div>`:""}
+       ${m.hoa?`<div class="row"><span>HOA</span><span class="num">${money(m.hoa)}</span></div>`:""}
+       ${m.pmi?`<div class="row"><span>PMI</span><span class="num">${money(m.pmi)}</span></div>`:""}
+       <div class="note">Uses your mortgage settings: ${S.calc.down}% down at ${S.calc.rate}% for ${S.calc.term} years.</div>
+       <a class="btn btn-s" style="margin-top:10px" href="#mortgage" data-price="${h.price}" id="dCalc">Adjust in calculator</a></div>
+     <form class="box" id="tourForm"><h3>Request a showing</h3>
+       <div class="fields">
+         <div class="field"><label for="tDate">Day</label><input type="date" id="tDate" required></div>
+         <div class="field"><label for="tTime">Time</label><select id="tTime"><option>Morning</option><option>Lunch</option><option>Afternoon</option><option>Evening</option></select></div>
+         <div class="field full"><label for="tNote">Questions for your agent</label><textarea id="tNote" placeholder="Is the roof new? Can we see it with the kids?"></textarea></div>
+       </div>
+       <button class="btn btn-p" style="margin-top:10px">Request showing</button></form>
+     <div class="field"><label for="dNote">My private notes</label><textarea id="dNote" placeholder="Loved the porch. Kitchen is small.">${S.notes[h.id]||""}</textarea></div>
+     <button class="btn ${fav?"btn-s":"btn-sun"}" type="button" id="dFav">${fav?"Saved · remove":"Save this home"}</button>
+   </div>`;
+  const d=new Date();d.setDate(d.getDate()+1);$("#tDate").value=d.toISOString().slice(0,10);
+  $("#tourForm").addEventListener("submit",e=>{e.preventDefault();S.tours.unshift({id:h.id,date:$("#tDate").value,time:$("#tTime").value,note:$("#tNote").value,at:Date.now()});save();toast("Showing request saved for "+h.addr);});
+  $("#dNote").addEventListener("input",e=>{S.notes[h.id]=e.target.value;save();});
+  $("#dFav").addEventListener("click",()=>{toggleFav(h.id);openHome(h.id);});
+  $("#dCalc").addEventListener("click",()=>{S.calc.price=h.price;S.calc.hoa=h.hoa;S.calc.flood=h.flood;S.calc.mode="pay";save();closeHome();});
+  $("#sheet").hidden=false;document.body.style.overflow="hidden";$("#dClose").focus();
+}
+function closeHome(){$("#sheet").hidden=true;document.body.style.overflow="";}
+$("#dClose").onclick=closeHome;
+$("#sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeHome();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("#sheet").hidden)closeHome();});
+
+function toggleFav(id){const i=S.fav.indexOf(id);i>=0?S.fav.splice(i,1):S.fav.push(id);save();toast(i>=0?"Removed from favorites":"Saved to favorites");renderAll();}
+document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-fav]"); if(f){e.stopPropagation();toggleFav(f.dataset.fav);return;}
+  const c=e.target.closest(".card"); if(c) openHome(c.dataset.id);
+});
+document.addEventListener("keydown",e=>{const c=e.target.closest&&e.target.closest(".card");if(c&&(e.key==="Enter"||e.key===" ")&&e.target===c){e.preventDefault();openHome(c.dataset.id);}});
+
+/* ---------- preferences ---------- */
+function optButtons(el,list,isOn,onTap){
+  el.innerHTML=list.map(x=>`<button type="button" class="opt" aria-pressed="${isOn(x)}">${x}</button>`).join("");
+  el.querySelectorAll(".opt").forEach((b,i)=>b.onclick=()=>{onTap(list[i]);renderPrefs();renderSearch();save();});
+}
+function toggleIn(arr,x){const i=arr.indexOf(x);i>=0?arr.splice(i,1):arr.push(x);}
+function renderPrefs(){
+  const p=S.prefs;
+  $("#pBudget").value=p.budget;$("#pBudgetOut").textContent=money(p.budget);
+  $("#pBeds").value=p.beds;$("#pBaths").value=p.baths;
+  optButtons($("#pAreas"),AREAS,x=>p.areas.includes(x),x=>toggleIn(p.areas,x));
+  optButtons($("#pFeatures"),FEATURES,x=>p.features.includes(x),x=>toggleIn(p.features,x));
+  optButtons($("#pTimeline"),["Just browsing","In 3–6 months","Ready now","Need to sell first"],x=>p.timeline===x,x=>p.timeline=x);
+}
+$("#pBudget").oninput=e=>{S.prefs.budget=+e.target.value;$("#pBudgetOut").textContent=money(S.prefs.budget);save();renderSearch();};
+$("#pBeds").onchange=e=>{S.prefs.beds=+e.target.value;save();renderSearch();};
+$("#pBaths").onchange=e=>{S.prefs.baths=+e.target.value;save();renderSearch();};
+
+/* ---------- calculator ---------- */
+const CF=["price","down","rate","term","tax","ins","flood","hoa","income","debts"];
+const cid=k=>"#c"+k[0].toUpperCase()+k.slice(1);
+function loadCalc(){CF.forEach(k=>$(cid(k)).value=S.calc[k]);}
+CF.forEach(k=>$(cid(k)).addEventListener("input",e=>{S.calc[k]=+e.target.value||0;save();renderCalc();renderSearch();}));
+function setMode(m){S.calc.mode=m;save();renderCalc();}
+$("#mPay").onclick=()=>setMode("pay");$("#mAfford").onclick=()=>setMode("afford");
+function affordPrice(c){
+  const budget=Math.max(0,Math.min(c.income*0.28/12,c.income*0.36/12-c.debts));
+  const d=c.down/100,r=c.rate/100/12,n=c.term*12, f=r?r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):1/n;
+  const per=f*(1-d)+c.tax/100/12+(c.down<20?(1-d)*0.005/12:0);
+  return {price:Math.max(0,(budget-c.ins/12-c.flood/12-c.hoa)/per),budget};
+}
+function renderCalc(){
+  const c=S.calc, aff=c.mode==="afford";
+  $("#mPay").setAttribute("aria-pressed",!aff);$("#mAfford").setAttribute("aria-pressed",aff);
+  $("#wrapPrice").hidden=aff;$("#wrapIncome").hidden=!aff;$("#wrapDebts").hidden=!aff;$("#rowRatio").hidden=!aff;
+  $("#calcInHead").textContent=aff?"Your finances":"The home";
+  $("#cDownOut").textContent=c.down+"%";
+  let price=c.price;
+  if(aff){const a=affordPrice(c);price=a.price;}
+  const m=monthly({...c,price});
+  $("#calcOutHead").textContent=aff?"You could shop up to":"Estimated monthly payment";
+  $("#cBig").innerHTML=aff?`${money(price)} <small>at ${money(m.total)}/mo</small>`:`${money(m.total)}<small>/mo</small>`;
+  const parts=[["Principal & interest",m.pi,"var(--brand)"],["Property tax",m.tax,"var(--sun)"],["Home insurance",m.ins,"#7d8fd6"],["Flood insurance",m.flood,"#3d8fa3"],["HOA",m.hoa,"#b98ad1"],["PMI",m.pmi,"#d07a6a"]].filter(p=>p[1]>0.5);
+  $("#cStack").innerHTML=parts.map(p=>`<span title="${p[0]}" style="width:${p[1]/m.total*100}%;background:${p[2]}"></span>`).join("");
+  $("#cLegend").innerHTML=parts.map(p=>`<div class="row"><span><i style="background:${p[2]}"></i>${p[0]}</span><b class="num">${money(p[1])}</b></div>`).join("");
+  $("#oLoan").textContent=money(m.loan);$("#oDown").textContent=money(price*c.down/100);
+  $("#oClose").textContent=money(price*0.03);$("#oInt").textContent=money(m.interest);
+  if(aff) $("#oRatio").textContent=c.income?(m.total/(c.income/12)*100).toFixed(1)+"%":"–";
+  $("#cShow").dataset.price=Math.round(price);
+}
+$("#cShow").onclick=()=>{
+  const p=+$("#cShow").dataset.price, opts=[...$("#fMax").options].map(o=>+o.value).filter(Boolean);
+  const pick=opts.filter(v=>v<=p*1.05).pop()||opts[0];
+  $("#fMax").value=pick;$("#fSort").value="pay";location.hash="search";
+};
+
+/* ---------- saved ---------- */
+function renderSaved(){
+  const t=$("#tours");
+  t.innerHTML=S.tours.length?S.tours.map(x=>{const h=L.find(y=>y.id===x.id);if(!h)return"";
+    const d=new Date(x.date+"T12:00");
+    return `<div class="tour"><div><div class="when">${d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})} · ${x.time}</div><div class="specs">${h.addr}, ${h.area}${x.note?" · “"+x.note.replace(/</g,"&lt;")+"”":""}</div></div><span class="st">Waiting on agent</span></div>`;}).join("")
+   :`<div class="empty">No showings yet. Open any home and tap Request showing.</div>`;
+  const favs=L.filter(h=>S.fav.includes(h.id));
+  $("#savedGrid").innerHTML=favs.length?favs.map(card).join(""):`<div class="empty">Tap the heart on a home to save it here.</div>`;
+}
+function updateCount(){const n=S.fav.length+S.tours.length,el=$("#savedCount");el.hidden=!n;el.textContent=n;}
+
+/* ---------- routing ---------- */
+const VIEWS=["search","my-style","mortgage","saved"];
+function route(){
+  closeHome();
+  const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):"search";
+  VIEWS.forEach(x=>$("#v-"+x).hidden=x!==v);
+  document.querySelectorAll(".tabs a").forEach(a=>a.setAttribute("aria-current",a.getAttribute("href")==="#"+v?"page":"false"));
+  if(v==="mortgage"){loadCalc();renderCalc();}
+  if(v==="saved")renderSaved();
+  if(v==="search")renderSearch();
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+
+function renderAll(){renderSearch();renderSaved();updateCount();}
+
+/* ---------- boot ---------- */
+AREAS.forEach(a=>$("#fArea").insertAdjacentHTML("beforeend",`<option>${a}</option>`));
+[...$("#fMax").options].forEach(o=>{if(o.value)o.textContent="Up to "+short(+o.value);});
+["#fArea","#fMax","#fBeds","#fType","#fSort"].forEach(s=>$(s).onchange=renderSearch);
+$("#agentName").textContent=AGENT.name+", "+AGENT.title;
+$("#agentBrok").textContent=AGENT.brokerage+" · "+AGENT.market;
+$("#agentPhone").textContent=AGENT.phone;$("#agentEmail").textContent=AGENT.email;
+$("#agentInit").textContent=AGENT.name.split(" ").map(w=>w[0]).join("").slice(0,2);
+$("#brandSub").textContent="with "+AGENT.name;
+$("#copyPhone").onclick=()=>{navigator.clipboard.writeText(AGENT.phone).then(()=>toast("Phone number copied"),()=>{const r=document.createRange();r.selectNodeContents($("#agentPhone"));getSelection().removeAllRanges();getSelection().addRange(r);toast("Number selected. Copy it from here.");});};
+renderPrefs();loadCalc();renderAll();route();
+</script>
