@@ -151,6 +151,16 @@ input[type=range]{width:100%;accent-color:var(--brand)}
 .agent div{min-width:0}
 .agent b{font-family:var(--f-display);font-size:18px;display:block}
 .agent .contact{user-select:all}
+.shul{display:flex;gap:6px;align-items:flex-start;font-size:13px}
+.shul svg{width:16px;height:16px;flex:none;fill:none;stroke:var(--brand);stroke-width:1.8;stroke-linejoin:round;margin-top:2px}
+.dim{color:var(--ink-2)}
+.mini{width:100%;max-width:100%;height:auto;display:block;background:var(--chip);border-radius:10px;margin-bottom:8px}
+.mini .ring{fill:none;stroke:var(--ink-2);stroke-opacity:.35;stroke-dasharray:3 4;stroke-width:1.2}
+.mini .rl{font-size:9px;fill:var(--ink-2);text-anchor:middle}
+.mini .pn{font-size:9px;font-weight:700;fill:#fff;text-anchor:middle}
+.mini .home{fill:var(--ink)}
+.pin{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;color:#fff;font-size:10px;font-style:normal;font-weight:700;margin-right:6px;vertical-align:-3px}
+.sub{font-size:12px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.03em;margin:16px 0 8px}
 footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px solid var(--line)}
 </style>
 
@@ -176,7 +186,7 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
     <div class="lede">
       <div>
         <h1 id="searchTitle">Homes picked for you</h1>
-        <p id="searchSub">Sorted by how well each home fits your wish list. Monthly estimates include Florida taxes and insurance.</p>
+        <p id="searchSub">Sorted by how well each home fits your wish list, including the walk to shul. Monthly estimates include Florida taxes and insurance.</p>
       </div>
       <span class="sample">Sample listings</span>
     </div>
@@ -185,7 +195,8 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
       <div><label for="fMax">Max price</label><select id="fMax"><option value="">Any</option><option>300000</option><option>400000</option><option>500000</option><option>650000</option><option>800000</option><option>1000000</option></select></div>
       <div><label for="fBeds">Beds</label><select id="fBeds"><option value="0">Any</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
       <div><label for="fType">Type</label><select id="fType"><option value="">Any</option><option>House</option><option>Condo</option><option>Townhome</option></select></div>
-      <div><label for="fSort">Sort</label><select id="fSort"><option value="match">Best match</option><option value="new">Newest</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="pay">Monthly payment</option></select></div>
+      <div><label for="fShul">Walk to shul</label><select id="fShul"><option value="0">Any distance</option><option value="10">10 min or less</option><option value="15">15 min or less</option><option value="20">20 min or less</option></select></div>
+      <div><label for="fSort">Sort</label><select id="fSort"><option value="match">Best match</option><option value="shul">Closest synagogue</option><option value="new">Newest</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="pay">Monthly payment</option></select></div>
     </div>
     <div class="grid" id="grid"></div>
   </section>
@@ -203,6 +214,11 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
         </div>
       </div>
       <div class="pane"><h2>Where you'd like to live</h2><div class="opts" id="pAreas"></div></div>
+      <div class="pane"><h2>Shul &amp; community</h2>
+        <div class="field"><label for="pShul">Walk to synagogue for Shabbat</label><select id="pShul"><option value="0">Doesn't matter</option><option value="10">Within 10 minutes</option><option value="15">Within 15 minutes</option><option value="20">Within 20 minutes</option><option value="30">Within 30 minutes</option></select></div>
+        <p class="sub">Synagogue type (pick none for any)</p><div class="opts" id="pDenoms"></div>
+        <p class="sub">Also close by</p><div class="opts" id="pCommunity"></div>
+      </div>
       <div class="pane"><h2>Must-haves</h2><div class="opts" id="pFeatures"></div></div>
       <div class="pane"><h2>Your timeline</h2><div class="opts" id="pTimeline"></div></div>
       <div><a class="btn btn-p" href="#search">See my matches</a></div>
@@ -272,7 +288,8 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
 </div></main>
 
 <footer class="gutter"><div class="wrap">
-  Prototype with sample listings, photos and agent details. A live version pulls real listings through the agent's MLS (IDX feed). Estimates are for planning only and are not a loan offer.
+  Community information shows public places such as synagogues, schools and kosher stores. It never shows who lives in a home or neighborhood.
+  Prototype with sample listings, community places and photos. A live version pulls real listings through the agent's MLS (IDX feed). Estimates are for planning only and are not a loan offer.
 </div></footer>
 
 <!-- Listing detail -->
@@ -286,7 +303,7 @@ footer{color:var(--ink-2);font-size:12.5px;padding-block:24px;border-top:1px sol
 
 <script>
 /* ---------- config: change these for the real agent ---------- */
-const AGENT = { name:"Jordan Avery", title:"REALTOR®", brokerage:"Your Brokerage Name", market:"Pensacola, FL", phone:"(850) 555-0142", email:"agent@example.com" };
+const AGENT = { name:"Fradie Zeilingold", title:"REALTOR®", brokerage:"Your Brokerage Name", market:"Pensacola, FL", phone:"(850) 555-0142", email:"agent@example.com" };
 
 /* ---------- sample data (fictional) ---------- */
 const AREAS = ["East Hill","Downtown","Cordova Park","Gulf Breeze","Pace","Navarre","Perdido Key","Milton"];
@@ -306,11 +323,38 @@ const L = [
  {id:"a12",price:349000,beds:2,baths:2.5,sqft:1420,type:"Townhome",area:"Downtown",addr:"611 N Barcelona St",year:2014,days:10,f:["Garage","Updated kitchen"],hoa:150,flood:0,c:["#c9a0a0","#f5eeee"],desc:"Brick townhome in North Hill with garage parking and a private courtyard."},
 ];
 
+/* ---------- Jewish community places (sample, fictional names; x/y in miles) ---------- */
+const PLACES=[
+ {n:"Congregation Ohr Hayam",t:"Synagogue",d:"Orthodox",x:1.1,y:1.0},
+ {n:"Chabad of the Bay",t:"Synagogue",d:"Chabad",x:0.2,y:0.3},
+ {n:"Congregation Shaarei Tikvah",t:"Synagogue",d:"Conservative",x:1.6,y:1.9},
+ {n:"Temple Beth Shalom",t:"Synagogue",d:"Reform",x:2.3,y:3.2},
+ {n:"Chabad of Santa Rosa",t:"Synagogue",d:"Chabad",x:10.3,y:9.2},
+ {n:"Chabad of Gulf Breeze",t:"Synagogue",d:"Chabad",x:4.2,y:-5.1},
+ {n:"Bay Kosher Market",t:"Kosher food",x:1.3,y:1.45},
+ {n:"Palafox Kosher Grill",t:"Kosher food",x:0.3,y:0.05},
+ {n:"Mikvah Mei Shalom",t:"Mikvah",x:0.85,y:1.3},
+ {n:"Gulf Coast Torah Academy",t:"Jewish day school",x:2.0,y:2.4},
+ {n:"Jewish Community Center",t:"JCC",x:2.7,y:3.0},
+];
+const POS={a1:[1.25,1.15,1],a2:[10.6,9.5],a3:[3.6,-5.4],a4:[0.05,0,1],a5:[2.7,3.6],a6:[22,-7],a7:[-14,-10],a8:[16,8],a9:[9.4,10.1],a10:[4.6,-4.7],a11:[1.5,1.0,1],a12:[0.6,0.8,1]};
+L.forEach(h=>{const p=POS[h.id];h.x=p[0];h.y=p[1];h.eruv=!!p[2];});
+const DENOMS=["Orthodox","Chabad","Conservative","Reform"];
+const COMMUNITY=["Kosher food","Mikvah","Jewish day school","JCC","Inside eruv"];
+const miles=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+const walkMin=mi=>Math.max(1,Math.round(mi*1.25*20));   /* street factor 1.25, 20 min per mile */
+const driveMin=mi=>Math.max(2,Math.round(mi*1.3*2.2+2));
+const travel=mi=>walkMin(mi)<=30?walkMin(mi)+" min walk":driveMin(mi)+" min drive";
+function shulFor(h){const ds=S.prefs.denoms;let best=null;
+  PLACES.filter(p=>p.t==="Synagogue"&&(!ds.length||ds.includes(p.d))).forEach(p=>{const m=miles(h,p);if(!best||m<best.mi)best={p,mi:m};});return best;}
+const hasCommunity=(h,c)=>c==="Inside eruv"?h.eruv:PLACES.some(p=>p.t===c&&miles(h,p)<=1.5);
+
 /* ---------- storage (best effort) ---------- */
 const KEY="gchf-v1";
-const defaults={fav:[],tours:[],notes:{},prefs:{budget:500000,beds:3,baths:2,areas:["East Hill","Gulf Breeze","Pace"],features:["Garage","Top schools"],timeline:"In 3–6 months"},calc:{price:450000,down:10,rate:6.25,term:30,tax:0.9,ins:3600,flood:0,hoa:0,income:110000,debts:450,mode:"pay"}};
+const defaults={fav:[],tours:[],notes:{},prefs:{budget:500000,beds:3,baths:2,areas:["East Hill","Gulf Breeze","Pace"],features:["Garage","Top schools"],timeline:"In 3–6 months",shulWalk:15,denoms:[],community:["Kosher food"]},calc:{price:450000,down:10,rate:6.25,term:30,tax:0.9,ins:3600,flood:0,hoa:0,income:110000,debts:450,mode:"pay"}};
 let S;
 try{ S=Object.assign(structuredClone(defaults),JSON.parse(localStorage.getItem(KEY)||"{}")); }catch(e){ S=structuredClone(defaults); }
+S.prefs=Object.assign(structuredClone(defaults.prefs),S.prefs);S.calc=Object.assign({},defaults.calc,S.calc);
 function save(){ try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){} updateCount(); }
 
 /* ---------- helpers ---------- */
@@ -335,7 +379,10 @@ function score(h){
   const want=p.features, has=want.filter(f=>h.f.includes(f));
   s+= want.length?30*has.length/want.length:30;
   has.slice(0,2).forEach(f=>why.push(f));
-  return {pct:Math.round(s),why};
+  let max=100;
+  if(p.shulWalk){max+=25;const sh=shulFor(h);if(sh){const w=walkMin(sh.mi);if(w<=p.shulWalk){s+=25;why.unshift(w+" min walk to shul");}else if(w<=p.shulWalk*2)s+=10;}}
+  if(p.community.length){max+=15;const c=p.community.filter(x=>hasCommunity(h,x));s+=15*c.length/p.community.length;c.slice(0,1).forEach(x=>why.push(x==="Inside eruv"?x:x+" nearby"));}
+  return {pct:Math.round(s/max*100),why};
 }
 
 /* house illustration (no external images) */
@@ -360,10 +407,29 @@ function art(h,big){
 
 /* ---------- search view ---------- */
 function filtered(){
-  const area=$("#fArea").value,max=+$("#fMax").value||Infinity,beds=+$("#fBeds").value,type=$("#fType").value,sort=$("#fSort").value;
-  let r=L.filter(h=>(!area||h.area===area)&&h.price<=max&&h.beds>=beds&&(!type||h.type===type));
-  const by={match:(x,y)=>score(y).pct-score(x).pct,new:(x,y)=>x.days-y.days,low:(x,y)=>x.price-y.price,high:(x,y)=>y.price-x.price,pay:(x,y)=>listingPay(x)-listingPay(y)}[sort];
+  const area=$("#fArea").value,max=+$("#fMax").value||Infinity,beds=+$("#fBeds").value,type=$("#fType").value,sort=$("#fSort").value,shul=+$("#fShul").value;
+  const sd=h=>{const x=shulFor(h);return x?x.mi:Infinity;};
+  let r=L.filter(h=>(!area||h.area===area)&&h.price<=max&&h.beds>=beds&&(!type||h.type===type)&&(!shul||walkMin(sd(h))<=shul));
+  const by={shul:(x,y)=>sd(x)-sd(y),match:(x,y)=>score(y).pct-score(x).pct,new:(x,y)=>x.days-y.days,low:(x,y)=>x.price-y.price,high:(x,y)=>y.price-x.price,pay:(x,y)=>listingPay(x)-listingPay(y)}[sort];
   return r.sort(by);
+}
+const STAR=`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20.5 17.5h-17zM12 21 3.5 6.5h17z"/></svg>`;
+function shulLine(h){const sh=shulFor(h);if(!sh)return"";
+  return `<div class="shul">${STAR}<span><b class="num">${travel(sh.mi)}</b> to ${sh.p.n} <span class="dim">(${sh.p.d})</span>${h.eruv?` <span class="dim">· in eruv</span>`:""}</span></div>`;}
+const PCOL={Synagogue:"var(--brand)","Kosher food":"var(--warn)",Mikvah:"#6f80c9","Jewish day school":"#a678c2",JCC:"#c4675a"};
+function communityBox(h){
+  const near=PLACES.map(p=>({...p,mi:miles(h,p)})).sort((a,b)=>a.mi-b.mi), within=near.filter(p=>p.mi<=1.5);
+  const cx=130,cy=95,sc=56; /* 56px per mile, 1.5 mi radius */
+  const map=`<svg class="mini" viewBox="0 0 260 190" role="img" aria-label="Map of Jewish community places within 1.5 miles of this home">
+    ${[[0.4,"10 min"],[0.8,"20 min"],[1.2,"30 min walk"]].map(([m,t])=>`<circle cx="${cx}" cy="${cy}" r="${m*sc}" class="ring"/><text x="${cx}" y="${cy-m*sc-3}" class="rl">${t}</text>`).join("")}
+    ${within.map((p,i)=>{const x=cx+(p.x-h.x)*sc,y=cy-(p.y-h.y)*sc;return `<circle cx="${x}" cy="${y}" r="8" fill="${PCOL[p.t]}"/><text x="${x}" y="${y+3.2}" class="pn">${i+1}</text>`;}).join("")}
+    <rect x="${cx-7}" y="${cy-7}" width="14" height="14" rx="3" class="home"/></svg>`;
+  const list=within.length?within:near.slice(0,3);
+  return `<div class="box"><h3>Jewish community nearby</h3>
+    ${within.length?map:`<p class="note">Nothing within 1.5 miles. Closest places:</p>`}
+    ${list.map((p,i)=>`<div class="row"><span>${within.length?`<i class="pin" style="background:${PCOL[p.t]}">${i+1}</i>`:""}${p.n} <span class="dim">· ${p.t==="Synagogue"?p.d:p.t}</span></span><b class="num">${travel(p.mi)}</b></div>`).join("")}
+    <div class="row"><span>Inside the eruv</span><b>${h.eruv?"Yes":"No"}</b></div>
+    <p class="note">The dark square is this home. Walking times are estimates (about 20 minutes per mile of streets). Confirm the eruv boundary with the local rabbi before Shabbat.</p></div>`;
 }
 function card(h){
   const m=score(h), fav=S.fav.includes(h.id);
@@ -375,6 +441,7 @@ function card(h){
       <div class="specs num">${h.beds} bd · ${h.baths} ba · ${h.sqft.toLocaleString()} sq ft · ${h.type}</div>
       <div class="addr">${h.addr}, ${h.area}</div>
       <div class="est num">About ${money(listingPay(h))}/mo all-in</div>
+      ${shulLine(h)}
       <div class="match"><span class="meter"><i style="width:${m.pct}%"></i></span><b class="num">${m.pct}% match</b><span>${m.why.slice(0,2).join(" · ")}</span></div>
     </div></article>`;
 }
@@ -396,6 +463,7 @@ function openHome(id){
      <div class="facts num"><div><b>${h.beds}</b><span>Beds</span></div><div><b>${h.baths}</b><span>Baths</span></div><div><b>${h.sqft.toLocaleString()}</b><span>Sq ft</span></div><div><b>${money(h.price/h.sqft)}</b><span>Per sq ft</span></div></div>
      <p style="margin:0">${h.desc}</p>
      <div class="chips">${h.f.map(f=>`<span class="chip ${S.prefs.features.includes(f)?"on":""}">${f}</span>`).join("")}</div>
+     ${communityBox(h)}
      <div class="box"><h3>${sc.pct}% match with your wish list</h3><div class="note">${sc.why.join(" · ")||"Update your wish list to see why."}</div></div>
      <div class="box"><h3>Monthly cost, all-in: <span class="num">${money(m.total)}</span></h3>
        <div class="row"><span>Principal &amp; interest</span><span class="num">${money(m.pi)}</span></div>
@@ -446,10 +514,14 @@ function renderPrefs(){
   $("#pBudget").value=p.budget;$("#pBudgetOut").textContent=money(p.budget);
   $("#pBeds").value=p.beds;$("#pBaths").value=p.baths;
   optButtons($("#pAreas"),AREAS,x=>p.areas.includes(x),x=>toggleIn(p.areas,x));
+  $("#pShul").value=p.shulWalk;
+  optButtons($("#pDenoms"),DENOMS,x=>p.denoms.includes(x),x=>toggleIn(p.denoms,x));
+  optButtons($("#pCommunity"),COMMUNITY,x=>p.community.includes(x),x=>toggleIn(p.community,x));
   optButtons($("#pFeatures"),FEATURES,x=>p.features.includes(x),x=>toggleIn(p.features,x));
   optButtons($("#pTimeline"),["Just browsing","In 3–6 months","Ready now","Need to sell first"],x=>p.timeline===x,x=>p.timeline=x);
 }
 $("#pBudget").oninput=e=>{S.prefs.budget=+e.target.value;$("#pBudgetOut").textContent=money(S.prefs.budget);save();renderSearch();};
+$("#pShul").onchange=e=>{S.prefs.shulWalk=+e.target.value;save();renderSearch();};
 $("#pBeds").onchange=e=>{S.prefs.beds=+e.target.value;save();renderSearch();};
 $("#pBaths").onchange=e=>{S.prefs.baths=+e.target.value;save();renderSearch();};
 
@@ -522,7 +594,7 @@ function renderAll(){renderSearch();renderSaved();updateCount();}
 /* ---------- boot ---------- */
 AREAS.forEach(a=>$("#fArea").insertAdjacentHTML("beforeend",`<option>${a}</option>`));
 [...$("#fMax").options].forEach(o=>{if(o.value)o.textContent="Up to "+short(+o.value);});
-["#fArea","#fMax","#fBeds","#fType","#fSort"].forEach(s=>$(s).onchange=renderSearch);
+["#fArea","#fMax","#fBeds","#fType","#fShul","#fSort"].forEach(s=>$(s).onchange=renderSearch);
 $("#agentName").textContent=AGENT.name+", "+AGENT.title;
 $("#agentBrok").textContent=AGENT.brokerage+" · "+AGENT.market;
 $("#agentPhone").textContent=AGENT.phone;$("#agentEmail").textContent=AGENT.email;
